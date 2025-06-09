@@ -1,42 +1,107 @@
-# 🎼 Tonalys
+# 🎼 Tonalys – Piano Harmony Assistant
 
-**Tonalys** is a mobile and web application built with Angular & Ionic to help musicians, composers, and learners explore **musical scales**, detect the **key** of a chord progression, and compose music more easily by understanding the **harmonic relationships** between chords and scales.
-
----
-
-## ✨ Key Features
-
-- 🎵 **Scale Explorer**:
-  - Complete list of **major** and **natural minor** scales.
-  - View **notes** and **diatonic chords** of each scale.
-  - Interactive piano keyboard to play the notes.
-
-- 🎼 **Composition Assistant**:
-  - Add your chord ideas progressively.
-  - See which **keys** your progression fits into.
-  - Get suggestions for additional chords that work harmonically.
+**Tonalys** is a Progressive Web App designed to help musicians, composers, and learners explore musical harmony. Powered by music theory and intelligent matching algorithms, Tonalys makes it easy to understand the relationship between scales, chords, and notes.
 
 ---
 
-## 🛠️ Technologies
+## ✨ Features
 
-- **Framework**: [Angular](https://angular.io/) + [Ionic](https://ionicframework.com/)
-- **Language**: TypeScript
-- **Design System**: Ionic Components
+### 🎵 1. List All Musical Scales
+
+Browse all available **scales**, including different **modes** such as:
+
+- Major
+- Minor (Natural)
+- Dorian  
+_(More modes coming soon!)_
+
+Each scale is defined by its tonic and mode, and displays all the notes that compose it.
 
 ---
 
-## 🚀 Getting Started
+### 🎹 2. Get Compatible Chords for a Scale
 
-### Prerequisites
+For every scale, Tonalys automatically computes the **compatible chords** built on each degree of the scale.
 
-- Node.js ≥ 18.x
-- Ionic CLI: `npm install -g @ionic/cli`
+- Example:  
+  For `C Major`, you'll find chords like:  
+  `C Major`, `D Minor`, `E Minor`, `F Major`, `G Major`, `A Minor`, `B Diminished`
 
-### Run Locally
+---
+
+### 🎼 3. Decompose Any Chord into Notes
+
+Tonalys lets you explore the internal structure of any chord.
+
+- Supported chord types:  
+  `Major`, `Minor`, `Diminished`, `Augmented`, `Dom7`, `Maj7`, `Min7`
+
+- Example:  
+  `G7` = `G`, `B`, `D`, `F`
+
+---
+
+### 🎯 4. Find Matching Scales for Given Chords
+
+Give Tonalys one or more chords, and it will find all the scales that include **all the notes of those chords**.
+
+- Use case:  
+  You wrote a progression like `D Minor → G7 → C Major` and want to know which scale(s) fit.
+
+- Result:  
+  `C Major`, `A Minor`, `D Dorian`, etc. (depending on matches)
+
+---
+
+## 🧱 Architecture (Backend)
+
+Tonalys is built around a clean and extensible music theory engine, with:
+
+- **Notes** – 12 chromatic steps, enharmonic aliases supported
+- **Chord Types** – structured by intervals (e.g. Major = `[0, 4, 7]`)
+- **Modes** – scale formulas by name (e.g. Minor = `[0, 2, 3, 5, 7, 8, 10]`)
+- **Chords** – computed from root + type
+- **Scales** – defined by tonic + mode, include compatibility logic
+
+All operations are pure, cached, and testable.
+
+---
+
+## 🚀 Roadmap
+
+- Add support for chord inversions and extensions
+- Introduce more modes (Lydian, Mixolydian, etc.)
+- Add piano visualizer and playback
+- Add user favorites & history
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**: Angular + Ionic
+- **Backend Logic**: TypeScript (Clean Architecture)
+- **PWA**: Service Worker, Offline Support
+- **Tests**: Jest (TDD-ready domain models)
+
+---
+
+## 📦 Installation (Dev)
 
 ```bash
-git clone https://github.com/your-username/tonalys.git
+git clone https://github.com/naofel-eal/tonalys.git
 cd tonalys
 npm install
-ionic serve
+npm start
+```
+
+---
+
+## 🙌 Contribution
+Tonalys is a personal learning project, but feedback, improvements and forks are always welcome.
+
+---
+
+## 📜 License
+MIT – feel free to build on top of it.
+
+---
