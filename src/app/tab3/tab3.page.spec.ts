@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab3Page } from './tab3.page';
+import { IonicModule } from '@ionic/angular';
 
 describe('Tab3Page', () => {
     let component: Tab3Page;
@@ -9,7 +9,7 @@ describe('Tab3Page', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-    imports: [IonicModule.forRoot(), ExploreContainerComponentModule, Tab3Page]
+    imports: [IonicModule.forRoot(), Tab3Page]
 }).compileComponents();
 
         fixture = TestBed.createComponent(Tab3Page);
