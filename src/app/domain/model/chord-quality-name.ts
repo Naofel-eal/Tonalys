@@ -1,9 +1,9 @@
 export enum ChordQualityName {
-  MAJOR,
-  MINOR,
-  DIMINISHED,
-  AUGMENTED,
-  DOM7,
-  MAJ7,
-  MIN7,
+  MAJOR = 'Major',
+  MINOR = 'Minor',
+  DIMINISHED = 'Diminished',
+  AUGMENTED = 'Augmented',
+  DOM7 = 'Dominant 7th',
+  MAJ7 = 'Major 7th',
+  MIN7 = 'Minor 7th',
 }

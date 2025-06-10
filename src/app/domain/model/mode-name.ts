@@ -1,5 +1,5 @@
 export enum ModeName {
-  MAJOR,
-  MINOR,
-  DORIAN,
+  MAJOR = 'Major',
+  MINOR = 'Minor',
+  DORIAN = 'Dorian',
 }
