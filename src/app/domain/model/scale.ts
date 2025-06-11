@@ -3,12 +3,16 @@ import { Mode } from './mode';
 import { Chord } from './chord';
 
 export class Scale {
+  public readonly notes: Note[];
+  
   constructor(
     public readonly tonic: Note,
     public readonly mode: Mode,
-  ) {}
+  ) {
+    this.notes = this.computeNotes();
+  }
 
-  get notes(): Note[] {
+  private computeNotes(): Note[] {
     return this.mode.intervals.map((interval) => {
       const idx = (this.tonic.index + interval) % Note.values.length;
       return Note.values[idx];
