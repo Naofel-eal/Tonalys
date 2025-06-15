@@ -2,20 +2,9 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'tab1',
-    loadComponent: () => import('./pages/tab1/tab1.page').then(m => m.Tab1Page),
-  },
-  {
-    path: 'tab2',
-    loadComponent: () => import('./pages/tab2/tab2.page').then(m => m.Tab2Page),
-  },
-  {
-    path: 'tab3',
-    loadComponent: () => import('./pages/tab3/tab3.page').then(m => m.Tab3Page),
-  },
-  {
     path: '',
-    redirectTo: '/tab1',
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./infrastructure/web/pages/main-page/main-page.component').then((m) => m.MainPageComponent),
   },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

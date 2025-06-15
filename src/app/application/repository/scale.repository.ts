@@ -1,6 +1,6 @@
-import { Scale } from 'src/app/domain/model/scale';
 import { Observable } from 'rxjs';
 import { InjectionToken } from '@angular/core';
+import { Scale } from 'src/app/domain';
 
 export interface IScaleRepository {
   saveAll(scales: Scale[]): Observable<Scale[]>;

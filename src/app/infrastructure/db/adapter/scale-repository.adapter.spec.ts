@@ -1,10 +1,8 @@
-import { ScaleRepositoryAdapter } from './scale-repository.adapter';
-import { Scale } from 'src/app/domain/model/scale';
-import { Note } from 'src/app/domain/model/note';
-import { Mode } from 'src/app/domain/model/mode';
+import { firstValueFrom, from } from 'rxjs';
+import { Scale, Note, Mode } from 'src/app/domain';
 import { ScaleEntity } from '../entity/scale-entity';
 import { scaleDb } from '../repository/scale-database';
-import { firstValueFrom, from } from 'rxjs';
+import { ScaleRepositoryAdapter } from './scale-repository.adapter';
 
 describe('ScaleRepositoryAdapter', () => {
   let repository: ScaleRepositoryAdapter;

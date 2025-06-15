@@ -64,4 +64,8 @@ describe('Scale', () => {
       NoteName.A_SHARP,
     ]);
   });
+
+  it('should throw an error if Note.fromName is called with an unknown name', () => {
+    expect(() => Note.fromName('Z' as NoteName)).toThrowError('Unknown note: Z');
+  });
 });

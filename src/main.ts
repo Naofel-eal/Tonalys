@@ -5,8 +5,8 @@ import { provideRouter } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-import { SCALE_REPOSITORY } from './app/application/repository/scale.repository';
-import { ScaleRepositoryAdapter } from './app/db/adapter/scale-repository.adapter';
+import { SCALE_REPOSITORY } from './app/application';
+import { ScaleRepositoryAdapter } from './app/infrastructure';
 
 bootstrapApplication(AppComponent, {
   providers: [

@@ -1,34 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { GenerateAllScalesUseCase } from './application/usecase/generate-all-scales/generate-all-scales.usecase';
+import { Component } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, square } from "ionicons/icons";
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { musicalNoteOutline } from 'ionicons/icons';
 import { Scale } from './domain/model/scale';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [
-    IonRouterOutlet, 
-    IonApp, 
-    IonTabs,
-    IonTabBar,
-    IonTabButton,
-    IonIcon,
-    IonLabel,
+  imports: [IonRouterOutlet, 
+    IonApp
   ],
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  public constructor(
-    private readonly generateScalesUseCase: GenerateAllScalesUseCase,
-  ) {
-    addIcons({ triangle, ellipse, square });
-  }
+export class AppComponent {
+  public scales: Observable<Scale[]> = of([]);
 
-  public ngOnInit(): void {
-    const scales: Observable<Scale[]> = this.generateScalesUseCase.execute();
-    scales.subscribe((storedScales) => console.log('✅ Scales saved and fetched:', storedScales));
+  public constructor() {
+    addIcons({ musicalNoteOutline });
   }
 }

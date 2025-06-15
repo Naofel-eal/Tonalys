@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Scale } from 'src/app/domain/model/scale';
-import { ScaleMapper } from '../mapper/scale-mapper';
 import { from, Observable, map, switchMap } from 'rxjs';
-import { IScaleRepository } from 'src/app/application/repository/scale.repository';
-import { scaleDb } from '../repository/scale-database';
+import { IScaleRepository } from 'src/app/application';
+import { Scale } from 'src/app/domain';
 import { ScaleEntity } from '../entity/scale-entity';
+import { ScaleMapper } from '../mapper/scale-mapper';
+import { scaleDb } from '../repository/scale-database';
 
 @Injectable({
     providedIn: 'root'
