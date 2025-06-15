@@ -1,0 +1,56 @@
+name: Release Angular App
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version from tag
+        id: get_version
+        if: steps.check_branch.outputs.branch != ''
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        if: steps.check_branch.outputs.branch != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        if: steps.check_branch.outputs.branch != ''
+        run: npm ci
+
+      - name: Build Angular app
+        if: steps.check_branch.outputs.branch != ''
+        run: npm run build
+
+      - name: Zip build folder with version
+        if: steps.check_branch.outputs.branch != ''
+        run: |
+          cd dist/tonalys
+          zip -r ../../tonalys-${{ steps.get_version.outputs.version }}.zip .
+
+      - name: Create GitHub Release with versioned asset
+        if: steps.check_branch.outputs.branch != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            🚀 Angular app ready to deploy!
+          files: tonalys-${{ steps.get_version.outputs.version }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
