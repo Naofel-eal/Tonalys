@@ -1,0 +1,5 @@
+echo "🧹 Running linter..."
+npm run lint || exit 1
+
+echo "🧪 Running tests..."
+npm run test -- --watch=false --browsers=ChromeHeadless || exit 1

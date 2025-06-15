@@ -1,0 +1,7 @@
+{
+  "name": "Tonalys",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
