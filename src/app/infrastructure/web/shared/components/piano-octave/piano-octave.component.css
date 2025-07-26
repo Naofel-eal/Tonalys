@@ -1,0 +1,103 @@
+:host {
+  --piano-width: 28em;
+  --piano-height: 11em;
+  --white-key-radius: 0 0 0.3em 0.3em;
+  --black-key-width: 2em;
+  --black-key-radius: 0 0 0.4em 0.4em;
+  --black-key-offset: calc(var(--black-key-width) / 2);
+  --black-key-height: 65%;
+  --white-key-label-size: 1.1em;
+  --black-key-label-size: 0.9em;
+  --black-key-shadow: 0 2px 8px #000a;
+}
+
+.piano-octave {
+  position: relative;
+  width: var(--piano-width);
+  height: var(--piano-height);
+  margin: 0 auto;
+  background: #222;
+  border-radius: 0.8em;
+  box-shadow: 0 0.15em 0.6em #0008;
+  overflow: hidden;
+}
+
+.white-keys {
+  display: flex;
+  height: 100%;
+  z-index: 1;
+}
+
+.white-key {
+  height: 100%;
+  border: 0.09em solid #ccc;
+  border-right: none;
+  border-radius: var(--white-key-radius);
+  background: linear-gradient(to bottom, #fff 90%, #eee 100%);
+  box-sizing: border-box;
+  transition: background 0.15s;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.white-key:last-child {
+  border-right: 0.09em solid #ccc;
+}
+
+.white-key .note-label {
+  font-size: var(--white-key-label-size);
+  color: #888;
+  margin-bottom: 0.28em;
+}
+
+.black-keys {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--black-key-height);
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.black-key {
+  position: absolute;
+  width: var(--black-key-width);
+  height: 100%;
+  background: linear-gradient(#333, #222 85%, #555);
+  border: 0.1em solid #111;
+  border-radius: var(--black-key-radius);
+  box-shadow: var(--black-key-shadow);
+  transition: all 0.2s;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.black-key .note-label {
+  font-size: var(--black-key-label-size);
+  color: #bbb;
+  margin-bottom: 0.18em;
+}
+
+.white-key.active {
+  background: linear-gradient(to bottom, #c8e6c9 88%, #a5d6a7 100%);
+}
+
+.black-key.active {
+  background: linear-gradient(#2e7d32, #1b5e20 85%, #388e3c);
+  border-color: #0d4013;
+}
+
+@media (max-width: 600px) {
+  :host {
+    --piano-width: 98vw;
+    --piano-height: 20vw;
+    --black-key-width: 6vw;
+  }
+  .piano-octave {
+    min-height: 4em;
+  }
+}

@@ -5,7 +5,7 @@ import { Chord } from './chord';
 export class Scale {
   public readonly notes: Note[];
   
-  constructor(
+  public constructor(
     public readonly tonic: Note,
     public readonly mode: Mode,
   ) {
@@ -19,7 +19,7 @@ export class Scale {
     });
   }
 
-  containsChord(chord: Chord): boolean {
+  public containsChord(chord: Chord): boolean {
     return chord.notes.every((note) =>
       this.notes.some((scaleNote) => scaleNote.equals(note)),
     );
