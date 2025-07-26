@@ -10,7 +10,7 @@ export class Mode {
   static readonly MINOR = new Mode(ModeName.MINOR, [0, 2, 3, 5, 7, 8, 10]);
   static readonly DORIAN = new Mode(ModeName.DORIAN, [0, 2, 3, 5, 7, 9, 10]);
 
-  static readonly values: Mode[] = [Mode.MAJOR, Mode.MINOR, Mode.DORIAN];
+  static readonly values: Mode[] = [Mode.MAJOR, Mode.MINOR, Mode.DORIAN] as const;
 
   static fromName(name: ModeName): Mode {
     const mode = Mode.values.find((m) => m.name === name);

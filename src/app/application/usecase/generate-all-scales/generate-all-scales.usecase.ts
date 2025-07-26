@@ -12,14 +12,9 @@ export class GenerateAllScalesUseCase {
   ) {}
 
   public execute(): Observable<Scale[]> {
-    const scales: Scale[] = [];
-
-    Note.values.forEach(note =>
-      Mode.values.forEach(mode =>
-      scales.push(new Scale(note, mode))
-      )
+    const scales = Note.values.flatMap(note =>
+      Mode.values.map(mode => new Scale(note, mode))
     );
-
     return this.scaleRepository.saveAll(scales);
   }
 }

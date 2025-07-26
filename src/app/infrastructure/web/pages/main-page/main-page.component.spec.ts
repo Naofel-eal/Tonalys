@@ -49,7 +49,7 @@ describe('MainPageComponent', () => {
   });
 
   it('Given ngOnInit, When usecase is executed, Then it should assign scales observable', (done) => {
-    component.scales.subscribe((scales) => {
+    component.scales$.subscribe((scales) => {
       expect(scales.length).toBe(1);
       expect(scales[0].tonic.name).toBe('C');
       done();
@@ -57,7 +57,31 @@ describe('MainPageComponent', () => {
   });
 
   it('Given a scale, When getScalesNotes is called, Then it should return the correct notes string', () => {
-    const result = component.getScalesNotes(fakeScale);
+    const result = component.getScalesNotesRepresentation(fakeScale);
     expect(result).toBe('C - D - E - F - G - A - B');
+  });
+
+  it('should return scales sorted by tonic index then mode name', (done) => {
+    const scales: Scale[] = [
+      { tonic: { name: NoteName.D, index: 2 } as Note, mode: Mode.MAJOR, notes: [] } as unknown as Scale,
+      { tonic: { name: NoteName.C, index: 0 } as Note, mode: Mode.MINOR, notes: [] } as unknown as Scale,
+      { tonic: { name: NoteName.C, index: 0 } as Note, mode: Mode.MAJOR, notes: [] } as unknown as Scale,
+      { tonic: { name: NoteName.C_SHARP, index: 1 } as Note, mode: Mode.DORIAN, notes: [] } as unknown as Scale,
+      { tonic: { name: NoteName.D, index: 2 } as Note, mode: Mode.DORIAN, notes: [] } as unknown as Scale,
+    ];
+
+    const component = new MainPageComponent({} as any);
+    (component as any).scales$ = of(scales);
+
+    component.sortedScales$.subscribe(sorted => {
+      expect(sorted.map(s => s.tonic.name)).toEqual([
+        Note.C.name,
+        Note.C.name,
+        Note.C_SHARP.name,
+        Note.D.name,
+        Note.D.name
+      ]);
+      done();
+    });
   });
 });
