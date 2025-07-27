@@ -2,9 +2,7 @@ import { fakeAsync, flushMicrotasks } from '@angular/core/testing';
 import { BehaviorSubject, of } from 'rxjs';
 import { ScaleStoreService } from './scale-store.service';
 import { IScaleRepository } from '../repository/scale.repository';
-import { Scale } from 'src/app/domain/model/scale';
-import { Note } from 'src/app/domain/model/note';
-import { Mode } from 'src/app/domain/model/mode';
+import { Mode, Note, Scale } from 'src/app/domain';
 
 describe('ScaleStoreService', () => {
   let store: ScaleStoreService;

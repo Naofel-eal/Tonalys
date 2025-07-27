@@ -1,14 +1,8 @@
-import { Mode } from '../model/mode';
-import { ModeName } from '../model/mode-name';
+import { Mode, ModeName } from 'src/app/domain';
 
 describe('Mode', () => {
   it('should expose all defined modes in .values', () => {
-    expect(Mode.values.length).toBe(3);
-    expect(Mode.values.map(m => m.name)).toEqual([
-      ModeName.MAJOR,
-      ModeName.MINOR,
-      ModeName.DORIAN,
-    ]);
+    expect(Mode.values.length).toBe(2);
   });
 
   it('should expose correct intervals for MAJOR mode', () => {
@@ -25,7 +19,7 @@ describe('Mode', () => {
 
   it('fromName should return correct instance for each mode name', () => {
     expect(Mode.fromName(ModeName.MAJOR)).toBe(Mode.MAJOR);
-    expect(Mode.fromName(ModeName.DORIAN)).toBe(Mode.DORIAN);
+    expect(Mode.fromName(ModeName.MINOR)).toBe(Mode.MINOR);
   });
 
   it('fromName should throw error for invalid mode name', () => {

@@ -1,6 +1,6 @@
-import { Note } from './note';
-import { Mode } from './mode';
-import { Chord } from './chord';
+import { Chord } from "../chord/chord";
+import { Mode } from "../mode/mode";
+import { Note } from "../note/note";
 
 export class Scale {
   public readonly notes: Note[];

@@ -4,8 +4,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonAccordionGroup,
-  IonAccordion,
   IonItem,
   IonList,
   IonLabel,
@@ -13,9 +11,12 @@ import {
 } from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
 import { map, Observable, of } from 'rxjs';
-import { Scale } from 'src/app/domain/model/scale';
+import { Scale } from 'src/app/domain/model/scale/scale';
 import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
 import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-scales/list-all-scales.usecase';
+import { Router, RouterLink } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { chevronForwardOutline, musicalNoteOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-main',
@@ -27,23 +28,25 @@ import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-s
     IonToolbar,
     IonTitle,
     IonContent,
-    IonAccordionGroup,
-    IonAccordion,
     IonItem,
     IonList,
     IonLabel,
     IonIcon,
     AsyncPipe,
-    PianoOctaveComponent
+    PianoOctaveComponent,
+    RouterLink,
   ],
 })
 export class MainPageComponent implements OnInit {
   public scales$: Observable<Scale[]> = of([]);
 
-  public constructor(private readonly listAllScalesUseCase: ListAllScalesUseCase) {
+  public constructor(
+    private readonly listAllScalesUseCase: ListAllScalesUseCase,
+    private readonly router: Router
+  ) {
   }
 
-  public ngOnInit(): void {
+  public ngOnInit(): void {    
     this.scales$ = this.listAllScalesUseCase.execute().pipe(
       map(scales => this.sortScales(scales))
     );
@@ -56,6 +59,15 @@ export class MainPageComponent implements OnInit {
   }
 
   public getScalesNotesRepresentation(scale: Scale): string {
-    return scale.notes.map((n) => n.name).join(' - ');
+    const sortedNotes = this.sortNotes(scale.notes);
+    return sortedNotes.map(n => n.name).join(' - ');
+  }
+
+  private sortNotes(notes: { index: number; name: string }[]): { index: number; name: string }[] {
+    return [...notes].sort((a, b) => a.index - b.index);
+  }
+
+  public openScale(scale: Scale): void {
+    this.router.navigate(['/scale', scale.tonic.name, scale.mode.name]);
   }
 }

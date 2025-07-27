@@ -1,11 +1,11 @@
 <div class="piano-octave">
   <div class="white-keys">
-    @for (key of whiteKeys; track key.index) {
+    @for (key of Keys; track key.index) {
       <div
         class="white-key"
         [class.active]="isActive(key)"
         [attr.data-note]="key.note.name"
-        [style.width.%]="whiteKeyWidthPercent"
+        [style.width.%]="KeyWidthPercent"
       >
         <span class="note-label">{{ key.note.name }}</span>
       </div>
@@ -18,7 +18,7 @@
           class="black-key"
           [style.left]="
             'calc(' +
-              whiteKeyWidthPercent * (getBlackKeyPosition(key)! + 1) +
+              KeyWidthPercent * (getBlackKeyPosition(key)! + 1) +
               '% - var(--black-key-offset))'
           "
           [class.active]="isActive(key)"

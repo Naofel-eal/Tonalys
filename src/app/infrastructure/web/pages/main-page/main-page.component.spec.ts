@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MainPageComponent } from './main-page.component';
 import { ListAllScalesUseCase } from 'src/app/application/usecase/list-all-scales/list-all-scales.usecase';
-import { Scale } from 'src/app/domain/model/scale';
+import { Scale } from 'src/app/domain/model/scale/scale';
 import { of } from 'rxjs';
 import { IonicModule } from '@ionic/angular';
 import { Mode, Note, NoteName } from 'src/app/domain';
+import { provideRouter } from '@angular/router';
 
 function createScale(tonic: Note, mode: Mode, notes: Note[]): Scale {
   return { tonic, mode, notes } as Scale;
@@ -34,7 +35,10 @@ describe('MainPageComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [IonicModule.forRoot()],
-      providers: [{ provide: ListAllScalesUseCase, useValue: spy }],
+      providers: [
+        { provide: ListAllScalesUseCase, useValue: spy },
+        provideRouter([])
+      ],
     }).compileComponents();
 
     listAllScalesUseCaseSpy = TestBed.inject(

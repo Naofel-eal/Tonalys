@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { musicalNoteOutline } from 'ionicons/icons';
-import { Scale } from './domain/model/scale';
+import { Scale } from './domain/model/scale/scale';
 import { Observable, of } from 'rxjs';
-import { GenerateAllScalesUseCase, ListAllScalesUseCase } from './application';
+import { GenerateAllScalesUseCase } from './application';
+import { addIcons } from 'ionicons';
+import { chevronForwardOutline, musicalNoteOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +17,8 @@ import { GenerateAllScalesUseCase, ListAllScalesUseCase } from './application';
 export class AppComponent {
   public scales: Observable<Scale[]> = of([]);
 
-  public constructor(
-    private readonly listAllScales: ListAllScalesUseCase,
-    private readonly generateAllScales: GenerateAllScalesUseCase
-  ) {
-    addIcons({ musicalNoteOutline });
+  public constructor(private readonly generateAllScales: GenerateAllScalesUseCase) {
+    addIcons({ musicalNoteOutline, chevronForwardOutline });
     this.generateAllScales.execute();
   }
 }

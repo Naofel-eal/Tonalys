@@ -1,31 +1,30 @@
-<ion-header [translucent]="true">
+<ion-header translucent="true">
   <ion-toolbar>
     <ion-title>Tonalys</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-accordion-group [multiple]="true">
+<ion-content fullscreen="true" class="ion-padding">
+  <ion-list lines="full">
     @for (scale of (scales$ | async); track $index) {
-      <ion-accordion>
-        <ion-item slot="header" lines="none">
-          <ion-icon slot="start" name="musical-note-outline"></ion-icon>
-          <ion-label>
-            <h2>{{ scale.tonic.name }} {{ scale.mode.name }}</h2>
-            <p>{{ getScalesNotesRepresentation(scale) }}</p>
-          </ion-label>
-        </ion-item>
+      <ion-item
+        button="true"
+        detail="false"
+        routerLink="/scale/{{ scale.tonic.name }}/{{ scale.mode.name }}"
+        routerDirection="forward"
+        class="scale-row"
+      >
+        <ion-icon slot="start" name="musical-note-outline"></ion-icon>
 
-        <ion-list slot="content" lines="none">
-          <app-piano-octave [scale]="scale"></app-piano-octave>
-          @for (note of scale.notes; track note) {
-            <ion-item>
-              <ion-icon slot="start" name="musical-note-outline"></ion-icon>
-              <ion-label>{{ note.name }}</ion-label>
-            </ion-item>
-          }
-        </ion-list>
-      </ion-accordion>
+        <ion-label>
+          <h2>{{ scale.tonic.name }} {{ scale.mode.name }}</h2>
+          <p>{{ getScalesNotesRepresentation(scale) }}</p>
+        </ion-label>
+
+        <app-piano-octave slot="end" [scale]="scale" class="octave-inline"></app-piano-octave>
+
+        <ion-icon slot="end" name="chevron-forward-outline" class="chevron"></ion-icon>
+      </ion-item>
     }
-  </ion-accordion-group>
+  </ion-list>
 </ion-content>

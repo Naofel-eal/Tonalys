@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Scale } from 'src/app/domain/model/scale';
-import { KeyboardLayout } from 'src/app/domain/model/keyboard-layout';
-import { BlackKey } from 'src/app/domain/model/black-key';
-import { Key } from 'src/app/domain/model/key';
-import { WhiteKey } from 'src/app/domain/model/white-key';
+import { Scale } from 'src/app/domain/model/scale/scale';
+import { KeyboardLayout } from 'src/app/domain/model/keyboard/keyboard-layout';
+import { Key } from 'src/app/domain/model/keyboard/key';
 
 @Component({
   selector: 'app-piano-octave',
@@ -23,19 +21,19 @@ export class PianoOctaveComponent {
     if (value) value.notes.forEach(note => this.highlighted.add(note.name));
   }
 
-  public get whiteKeys(): WhiteKey[] { return this.layout.whiteKeys; }
-  public get blackKeys(): BlackKey[] { return this.layout.blackKeys; }
+  public get Keys(): Key[] { return this.layout.Keys; }
+  public get blackKeys(): Key[] { return this.layout.blackKeys; }
 
   public isActive(key: Key): boolean {
     return this.highlighted.has(key.note.name);
   }
 
-  public getBlackKeyPosition(key: BlackKey): number | null {
-    return this.layout.getLeftWhiteKeyIndex(key);
+  public getBlackKeyPosition(key: Key): number | null {
+    return this.layout.getLeftKeyIndex(key);
   }
 
-  public get whiteKeyWidthPercent(): number {
-    return PianoOctaveComponent.WHITE_KEYS_TOTAL_WIDTH_PERCENT / this.whiteKeys.length;
+  public get KeyWidthPercent(): number {
+    return PianoOctaveComponent.WHITE_KEYS_TOTAL_WIDTH_PERCENT / this.Keys.length;
   }
 
   public get blackKeyOffsetPx(): number {

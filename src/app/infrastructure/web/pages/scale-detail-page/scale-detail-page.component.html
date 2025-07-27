@@ -1,0 +1,24 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ (scale$ | async)?.tonic?.name }} {{ (scale$ | async)?.mode?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @let scale = scale$ | async;
+  @if (scale) {
+    <app-piano-octave [scale]="scale"></app-piano-octave>
+
+    <ion-list lines="none" class="ion-margin-top">
+      @for (note of scale.notes; track $index) {
+        <ion-item>
+          <ion-icon slot="start" name="musical-note-outline"></ion-icon>
+          <ion-label>{{ note.name }}</ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  }
+</ion-content>

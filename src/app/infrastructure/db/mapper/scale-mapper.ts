@@ -1,4 +1,6 @@
-import { Scale, Note, Mode } from "src/app/domain";
+import { Scale } from "src/app/domain";
+import { Mode } from "src/app/domain/model/mode/mode";
+import { Note } from "src/app/domain/model/note/note";
 import { ScaleEntity } from "../entity/scale-entity";
 
 

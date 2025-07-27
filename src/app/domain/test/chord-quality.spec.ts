@@ -1,5 +1,4 @@
-import { ChordQuality } from '../model/chord-quality';
-import { ChordQualityName } from '../model/chord-quality-name';
+import {ChordQuality, ChordQualityName } from 'src/app/domain';
 
 describe('ChordQuality', () => {
   it('should expose all known chord qualities in values()', () => {

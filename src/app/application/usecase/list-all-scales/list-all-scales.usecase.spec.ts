@@ -1,9 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { ListAllScalesUseCase } from './list-all-scales.usecase';
-import { Scale } from 'src/app/domain/model/scale';
-import { Mode } from 'src/app/domain/model/mode';
-import { Note } from 'src/app/domain/model/note';
 import { ScaleStoreService } from '../../service/scale-store.service';
+import { Scale, Note, Mode } from 'src/app/domain';
 
 describe('ListAllScalesUseCase', () => {
   let useCase: ListAllScalesUseCase;

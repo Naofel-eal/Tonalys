@@ -1,9 +1,4 @@
-import { Scale } from '../model/scale';
-import { Note } from '../model/note';
-import { NoteName } from '../model/note-name';
-import { Mode } from '../model/mode';
-import { Chord } from '../model/chord';
-import { ChordQuality } from '../model/chord-quality';
+import { Chord, ChordQuality, Mode, Note, NoteName, Scale } from 'src/app/domain';
 
 describe('Scale', () => {
   it('should compute the correct notes for C Major scale', () => {

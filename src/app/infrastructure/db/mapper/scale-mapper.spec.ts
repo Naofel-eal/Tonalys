@@ -1,10 +1,6 @@
 import { ScaleMapper } from './scale-mapper';
-import { Note } from 'src/app/domain/model/note';
-import { Mode } from 'src/app/domain/model/mode';
-import { Scale } from 'src/app/domain/model/scale';
 import { ScaleEntity } from '../entity/scale-entity';
-import { NoteName } from 'src/app/domain/model/note-name';
-import { ModeName } from 'src/app/domain/model/mode-name';
+import { Mode, ModeName, Note, NoteName, Scale } from 'src/app/domain';
 
 describe('ScaleMapper', () => {
   const scale = new Scale(Note.C, Mode.MAJOR);

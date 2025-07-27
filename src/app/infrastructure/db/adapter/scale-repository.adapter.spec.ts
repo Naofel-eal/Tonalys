@@ -1,7 +1,7 @@
 import { firstValueFrom, from } from 'rxjs';
 import { Scale, Note, Mode } from 'src/app/domain';
 import { ScaleEntity } from '../entity/scale-entity';
-import { scaleDb } from '../repository/scale-database';
+import { db } from '../repository/scale-database';
 import { ScaleRepositoryAdapter } from './scale-repository.adapter';
 
 describe('ScaleRepositoryAdapter', () => {
@@ -17,7 +17,7 @@ describe('ScaleRepositoryAdapter', () => {
 
   beforeEach(async () => {
     repository = new ScaleRepositoryAdapter();
-    await scaleDb.scales.clear();
+    await db.scales.clear();
   });
 
   it('should save and return inserted scales', async () => {
@@ -30,7 +30,7 @@ describe('ScaleRepositoryAdapter', () => {
   });
 
   it('should return all stored scales', async () => {
-    await firstValueFrom(from(scaleDb.scales.bulkPut([scaleEntity])));
+    await firstValueFrom(from(db.scales.bulkPut([scaleEntity])));
 
     const result = await firstValueFrom(repository.getAll());
 
@@ -40,7 +40,7 @@ describe('ScaleRepositoryAdapter', () => {
   });
 
   it('should return scale by id', async () => {
-    await firstValueFrom(from(scaleDb.scales.put(scaleEntity)));
+    await firstValueFrom(from(db.scales.put(scaleEntity)));
 
     const result = await firstValueFrom(repository.getById(scaleEntity.id));
 

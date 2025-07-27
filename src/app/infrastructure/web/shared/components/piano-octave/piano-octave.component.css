@@ -1,6 +1,6 @@
 :host {
-  --piano-width: 28em;
-  --piano-height: 11em;
+  --piano-width: 100%;
+  --piano-height: 100%;
   --white-key-radius: 0 0 0.3em 0.3em;
   --black-key-width: 2em;
   --black-key-radius: 0 0 0.4em 0.4em;
@@ -15,10 +15,6 @@
   position: relative;
   width: var(--piano-width);
   height: var(--piano-height);
-  margin: 0 auto;
-  background: #222;
-  border-radius: 0.8em;
-  box-shadow: 0 0.15em 0.6em #0008;
   overflow: hidden;
 }
 
@@ -89,15 +85,4 @@
 .black-key.active {
   background: linear-gradient(#2e7d32, #1b5e20 85%, #388e3c);
   border-color: #0d4013;
-}
-
-@media (max-width: 600px) {
-  :host {
-    --piano-width: 98vw;
-    --piano-height: 20vw;
-    --black-key-width: 6vw;
-  }
-  .piano-octave {
-    min-height: 4em;
-  }
 }

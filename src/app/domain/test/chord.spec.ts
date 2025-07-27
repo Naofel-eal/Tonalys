@@ -1,7 +1,4 @@
-import { Chord } from '../model/chord';
-import { Note } from '../model/note';
-import { NoteName } from '../model/note-name';
-import { ChordQuality } from '../model/chord-quality';
+import { Chord, ChordQuality, Note, NoteName } from 'src/app/domain';
 
 describe('Chord', () => {
   it('should correctly compute notes of a C major chord', () => {

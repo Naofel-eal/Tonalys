@@ -1,4 +1,4 @@
-import { Note } from './note';
+import { Note } from '../note/note';
 import { ChordQuality } from './chord-quality';
 
 export class Chord {

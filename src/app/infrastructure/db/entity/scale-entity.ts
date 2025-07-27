@@ -1,4 +1,5 @@
-import { NoteName, ModeName } from "src/app/domain";
+import { ModeName } from "src/app/domain/model/mode/mode-name";
+import { NoteName } from "src/app/domain/model/note/note-name";
 
 export interface ScaleEntity {
   id: string;
