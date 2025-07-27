@@ -4,7 +4,7 @@ import { IScaleRepository } from 'src/app/application';
 import { Scale } from 'src/app/domain';
 import { ScaleEntity } from '../entity/scale-entity';
 import { ScaleMapper } from '../mapper/scale-mapper';
-import { db } from '../repository/scale-database';
+import { db } from '../repository/database';
 
 @Injectable({providedIn: 'root'})
 export class ScaleRepositoryAdapter implements IScaleRepository {

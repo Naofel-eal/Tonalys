@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { GenerateAllScalesUseCase } from './generate-all-scales.usecase';
-import { ScaleStoreService } from '../../service/scale-store.service';
+import { ScaleStoreService } from '../../service/scale-store/scale-store.service';
 import { Scale, Note, Mode, NoteName, ModeName } from 'src/app/domain';
 
 describe('GenerateAllScalesUseCase', () => {

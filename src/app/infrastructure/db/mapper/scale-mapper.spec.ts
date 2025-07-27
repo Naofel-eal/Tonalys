@@ -35,7 +35,8 @@ describe('ScaleMapper', () => {
         NoteName.G,
         NoteName.A,
         NoteName.B
-      ]
+      ],
+      chords: scale.chords
     };
 
     const mapped = ScaleMapper.toDomain(entity);

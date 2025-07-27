@@ -11,6 +11,7 @@ export class ScaleMapper {
       tonic: scale.tonic.name,
       mode: scale.mode.name,
       notes: scale.notes.map(n => n.name),
+      chords: scale.chords
     };
   }
 

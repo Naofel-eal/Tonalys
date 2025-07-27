@@ -1,7 +1,7 @@
 import { firstValueFrom, from } from 'rxjs';
 import { Scale, Note, Mode } from 'src/app/domain';
 import { ScaleEntity } from '../entity/scale-entity';
-import { db } from '../repository/scale-database';
+import { db } from '../repository/database';
 import { ScaleRepositoryAdapter } from './scale-repository.adapter';
 
 describe('ScaleRepositoryAdapter', () => {
@@ -13,6 +13,7 @@ describe('ScaleRepositoryAdapter', () => {
     tonic: scale.tonic.name,
     mode: scale.mode.name,
     notes: scale.notes.map(n => n.name),
+    chords: scale.chords
   };
 
   beforeEach(async () => {

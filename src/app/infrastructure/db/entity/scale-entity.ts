@@ -1,9 +1,9 @@
-import { ModeName } from "src/app/domain/model/mode/mode-name";
-import { NoteName } from "src/app/domain/model/note/note-name";
+import { Chord, ModeName, NoteName } from "src/app/domain";
 
 export interface ScaleEntity {
   id: string;
   tonic: NoteName;
   mode: ModeName; 
   notes: NoteName[];
+  chords: Chord[];
 }
