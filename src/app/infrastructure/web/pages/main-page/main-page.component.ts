@@ -13,11 +13,9 @@ import {
 } from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
 import { map, Observable, of } from 'rxjs';
-import { addIcons } from 'ionicons';
-import { musicalNoteOutline } from 'ionicons/icons';
-import { ListAllScalesUseCase } from 'src/app/application/usecase/list-all-scales/list-all-scales.usecase';
 import { Scale } from 'src/app/domain/model/scale';
 import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
+import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-scales/list-all-scales.usecase';
 
 @Component({
   selector: 'app-main',
@@ -42,22 +40,19 @@ import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano
 export class MainPageComponent implements OnInit {
   public scales$: Observable<Scale[]> = of([]);
 
-  public constructor(private readonly listAllScales: ListAllScalesUseCase) {
-    addIcons({ musicalNoteOutline });
-  }
-
-  public get sortedScales$(): Observable<Scale[]> {
-    return this.scales$.pipe(
-      map(scales =>
-        [...scales].sort((a, b) =>
-          a.tonic.index - b.tonic.index || a.mode.name.localeCompare(b.mode.name)
-        )
-      )
-    );
+  public constructor(private readonly listAllScalesUseCase: ListAllScalesUseCase) {
   }
 
   public ngOnInit(): void {
-    this.scales$ = this.listAllScales.execute();
+    this.scales$ = this.listAllScalesUseCase.execute().pipe(
+      map(scales => this.sortScales(scales))
+    );
+  }
+
+  private sortScales(scales: Scale[]): Scale[] {
+    return [...scales].sort(
+      (a, b) => a.tonic.index - b.tonic.index || a.mode.name.localeCompare(b.mode.name)
+    );
   }
 
   public getScalesNotesRepresentation(scale: Scale): string {

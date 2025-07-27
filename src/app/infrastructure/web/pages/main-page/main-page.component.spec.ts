@@ -6,27 +6,31 @@ import { of } from 'rxjs';
 import { IonicModule } from '@ionic/angular';
 import { Mode, Note, NoteName } from 'src/app/domain';
 
-const fakeScale: Scale = {
-  tonic: { name: NoteName.C } as Note,
-  mode: Mode.MAJOR,
-  notes: [
-    { name: NoteName.C } as Note,
-    { name: NoteName.D } as Note,
-    { name: NoteName.E } as Note,
-    { name: NoteName.F } as Note,
-    { name: NoteName.G } as Note,
-    { name: NoteName.A } as Note,
-    { name: NoteName.B } as Note,
-  ],
-} as Scale;
+function createScale(tonic: Note, mode: Mode, notes: Note[]): Scale {
+  return { tonic, mode, notes } as Scale;
+}
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
   let fixture: ComponentFixture<MainPageComponent>;
   let listAllScalesUseCaseSpy: jasmine.SpyObj<ListAllScalesUseCase>;
 
+  const fakeScale: Scale = createScale(
+    { name: NoteName.C, index: 0 } as Note,
+    Mode.MAJOR,
+    [
+      { name: NoteName.C } as Note,
+      { name: NoteName.D } as Note,
+      { name: NoteName.E } as Note,
+      { name: NoteName.F } as Note,
+      { name: NoteName.G } as Note,
+      { name: NoteName.A } as Note,
+      { name: NoteName.B } as Note,
+    ]
+  );
+
   beforeEach(waitForAsync(() => {
-    const spy = jasmine.createSpyObj('ListAllScalesUseCase', ['execute']);
+    const spy = jasmine.createSpyObj<ListAllScalesUseCase>('ListAllScalesUseCase', ['execute']);
 
     TestBed.configureTestingModule({
       imports: [IonicModule.forRoot()],
@@ -44,42 +48,44 @@ describe('MainPageComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('Given the component is created, Then it should instantiate properly', () => {
+  it('should instantiate the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Given ngOnInit, When usecase is executed, Then it should assign scales observable', (done) => {
-    component.scales$.subscribe((scales) => {
+  it('should expose scales$ with sorted values from use case', (done) => {
+    component.scales$.subscribe((scales: Scale[]) => {
       expect(scales.length).toBe(1);
-      expect(scales[0].tonic.name).toBe('C');
+      expect(scales[0].tonic.name).toBe(NoteName.C);
       done();
     });
   });
 
-  it('Given a scale, When getScalesNotes is called, Then it should return the correct notes string', () => {
+  it('should format notes as a string via getScalesNotesRepresentation', () => {
     const result = component.getScalesNotesRepresentation(fakeScale);
     expect(result).toBe('C - D - E - F - G - A - B');
   });
 
-  it('should return scales sorted by tonic index then mode name', (done) => {
-    const scales: Scale[] = [
-      { tonic: { name: NoteName.D, index: 2 } as Note, mode: Mode.MAJOR, notes: [] } as unknown as Scale,
-      { tonic: { name: NoteName.C, index: 0 } as Note, mode: Mode.MINOR, notes: [] } as unknown as Scale,
-      { tonic: { name: NoteName.C, index: 0 } as Note, mode: Mode.MAJOR, notes: [] } as unknown as Scale,
-      { tonic: { name: NoteName.C_SHARP, index: 1 } as Note, mode: Mode.DORIAN, notes: [] } as unknown as Scale,
-      { tonic: { name: NoteName.D, index: 2 } as Note, mode: Mode.DORIAN, notes: [] } as unknown as Scale,
+  it('should expose sorted scales when usecase returns multiple', (done) => {
+    const unordered: Scale[] = [
+      createScale({ name: NoteName.D, index: 2 } as Note, Mode.MAJOR, []),
+      createScale({ name: NoteName.C, index: 0 } as Note, Mode.MINOR, []),
+      createScale({ name: NoteName.C, index: 0 } as Note, Mode.MAJOR, []),
+      createScale({ name: NoteName.C_SHARP, index: 1 } as Note, Mode.DORIAN, []),
+      createScale({ name: NoteName.D, index: 2 } as Note, Mode.DORIAN, []),
     ];
+    listAllScalesUseCaseSpy.execute.and.returnValue(of(unordered));
 
-    const component = new MainPageComponent({} as any);
-    (component as any).scales$ = of(scales);
+    fixture = TestBed.createComponent(MainPageComponent);
+    component = fixture.componentInstance;
+    component.ngOnInit();
 
-    component.sortedScales$.subscribe(sorted => {
+    component.scales$.subscribe(sorted => {
       expect(sorted.map(s => s.tonic.name)).toEqual([
-        Note.C.name,
-        Note.C.name,
-        Note.C_SHARP.name,
-        Note.D.name,
-        Note.D.name
+        NoteName.C,
+        NoteName.C,
+        NoteName.C_SHARP,
+        NoteName.D,
+        NoteName.D
       ]);
       done();
     });

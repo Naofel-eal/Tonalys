@@ -6,9 +6,7 @@ import { ScaleEntity } from '../entity/scale-entity';
 import { ScaleMapper } from '../mapper/scale-mapper';
 import { scaleDb } from '../repository/scale-database';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class ScaleRepositoryAdapter implements IScaleRepository {
 
     public saveAll(scales: Scale[]): Observable<Scale[]> {
@@ -21,7 +19,6 @@ export class ScaleRepositoryAdapter implements IScaleRepository {
             map(entities => entities.map(ScaleMapper.toDomain))
         );
     }
-
 
     public getAll(): Observable<Scale[]> {
         return from(scaleDb.scales.toArray()).pipe(

@@ -1,31 +1,35 @@
-import { of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { GenerateAllScalesUseCase } from './generate-all-scales.usecase';
-import { IScaleRepository } from '../../repository/scale.repository';
+import { ScaleStoreService } from '../../service/scale-store.service';
+import { Scale } from 'src/app/domain/model/scale';
 import { Note } from 'src/app/domain/model/note';
 import { Mode } from 'src/app/domain/model/mode';
 import { NoteName } from 'src/app/domain/model/note-name';
 import { ModeName } from 'src/app/domain/model/mode-name';
-import { Scale } from 'src/app/domain/model/scale';
 
 describe('GenerateAllScalesUseCase', () => {
   let useCase: GenerateAllScalesUseCase;
-  let mockRepository: jasmine.SpyObj<IScaleRepository>;
+  let store: jasmine.SpyObj<ScaleStoreService>;
+  let scalesSubject: BehaviorSubject<Scale[]>;
 
   beforeEach(() => {
-    mockRepository = jasmine.createSpyObj<IScaleRepository>('IScaleRepository', ['saveAll']);
-    useCase = new GenerateAllScalesUseCase(mockRepository);
+    scalesSubject = new BehaviorSubject<Scale[]>([]);
+
+    store = jasmine.createSpyObj<ScaleStoreService>('ScaleStoreService', ['init'], { scales$: scalesSubject.asObservable() });
+
+    useCase = new GenerateAllScalesUseCase(store);
   });
 
-  it('should generate a scale for every note and mode combination and save them', (done) => {
+  it('should call store.init and return scales$', (done) => {
     const expectedScales = Note.values.flatMap(note =>
       Mode.values.map(mode => new Scale(note, mode))
     );
 
-    mockRepository.saveAll.and.returnValue(of(expectedScales));
+    scalesSubject.next(expectedScales);
 
     useCase.execute().subscribe((scales) => {
-      expect(scales.length).toBe(expectedScales.length);
-      expect(mockRepository.saveAll).toHaveBeenCalledWith(jasmine.any(Array));
+      expect(store.init).toHaveBeenCalled();
+      expect(scales).toEqual(expectedScales);
       done();
     });
   });
@@ -34,8 +38,7 @@ describe('GenerateAllScalesUseCase', () => {
     const expectedScales = Note.values.flatMap(note =>
       Mode.values.map(mode => new Scale(note, mode))
     );
-
-    mockRepository.saveAll.and.returnValue(of(expectedScales));
+    scalesSubject.next(expectedScales);
 
     useCase.execute().subscribe((scales) => {
       const cMajor = scales.find(s => s.tonic.name === NoteName.C && s.mode.name === ModeName.MAJOR);
@@ -57,8 +60,7 @@ describe('GenerateAllScalesUseCase', () => {
     const expectedScales = Note.values.flatMap(note =>
       Mode.values.map(mode => new Scale(note, mode))
     );
-
-    mockRepository.saveAll.and.returnValue(of(expectedScales));
+    scalesSubject.next(expectedScales);
 
     useCase.execute().subscribe((scales) => {
       const ids = scales.map(s => `${s.tonic.name}-${s.mode.name}`);

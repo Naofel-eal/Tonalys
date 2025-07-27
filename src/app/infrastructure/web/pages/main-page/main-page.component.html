@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-accordion-group [multiple]="true">
-    @for (scale of (sortedScales$ | async); track $index) {
+    @for (scale of (scales$ | async); track $index) {
       <ion-accordion>
         <ion-item slot="header" lines="none">
           <ion-icon slot="start" name="musical-note-outline"></ion-icon>

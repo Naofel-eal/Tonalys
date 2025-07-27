@@ -1,20 +1,14 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Scale, Note, Mode } from 'src/app/domain';
-import { SCALE_REPOSITORY, IScaleRepository } from '../../repository/scale.repository';
+import { Scale } from 'src/app/domain';
+import { ScaleStoreService } from '../../service/scale-store.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class GenerateAllScalesUseCase {
-  constructor(
-    @Inject(SCALE_REPOSITORY) private readonly scaleRepository: IScaleRepository
-  ) {}
+  constructor(private readonly store: ScaleStoreService) {}
 
   public execute(): Observable<Scale[]> {
-    const scales = Note.values.flatMap(note =>
-      Mode.values.map(mode => new Scale(note, mode))
-    );
-    return this.scaleRepository.saveAll(scales);
+    this.store.init();
+    return this.store.scales$;
   }
 }
