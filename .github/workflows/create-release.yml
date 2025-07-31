@@ -24,11 +24,11 @@ jobs:
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Set version in package.json
+          
+      - name: Generate version.ts
         run: |
           VERSION=${{ steps.get_version.outputs.version }}
-          jq '.version="'$VERSION'"' package.json > tmp.$$.json && mv tmp.$$.json package.json
+          echo "export const VERSION = '$VERSION';" > src/version.ts
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
