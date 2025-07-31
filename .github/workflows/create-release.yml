@@ -35,8 +35,8 @@ jobs:
 
       - name: Zip build folder with version
         run: |
-          cd dist/tonalys
-          zip -r ../../tonalys-${{ steps.get_version.outputs.version }}.zip .
+          cd /home/runner/work/Tonalys/Tonalys
+          zip -r tonalys-${{ steps.get_version.outputs.version }}.zip ./www/browser
 
       - name: Create GitHub Release with versioned asset
         uses: softprops/action-gh-release@v2
