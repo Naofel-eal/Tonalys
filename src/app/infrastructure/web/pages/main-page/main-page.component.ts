@@ -5,6 +5,7 @@ import {
   IonTitle,
   IonContent,
   IonIcon,
+  IonRouterLinkWithHref,
 } from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
 import { map, Observable, of } from 'rxjs';
@@ -27,7 +28,8 @@ import packageJson from '../../../../../../package.json';
     IonIcon,
     AsyncPipe,
     PianoOctaveComponent,
-    RouterLink
+    RouterLink,
+    IonRouterLinkWithHref,
   ],
 })
 export class MainPageComponent implements OnInit {
