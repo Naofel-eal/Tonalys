@@ -11,7 +11,7 @@ import { map, Observable, of } from 'rxjs';
 import { Scale } from 'src/app/domain/model/scale/scale';
 import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
 import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-scales/list-all-scales.usecase';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import packageJson from '../../../../../../package.json';
 
 @Component({
@@ -27,6 +27,7 @@ import packageJson from '../../../../../../package.json';
     IonIcon,
     AsyncPipe,
     PianoOctaveComponent,
+    RouterLink
   ],
 })
 export class MainPageComponent implements OnInit {
@@ -58,9 +59,5 @@ export class MainPageComponent implements OnInit {
 
   private sortNotes(notes: { index: number; name: string }[]): { index: number; name: string }[] {
     return [...notes].sort((a, b) => a.index - b.index);
-  }
-
-  public openScale(scale: Scale): void {
-    this.router.navigate(['/scale', scale.tonic.name, scale.mode.name]);
   }
 }

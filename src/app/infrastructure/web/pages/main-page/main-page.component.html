@@ -15,7 +15,10 @@
     <h1 class="main-title">Explore the scales</h1>
     <div class="scales-grid">
       @for (scale of (scales$ | async); track $index) {
-        <div class="scale-card" (click)="openScale(scale)">
+        <div 
+          class="scale-card" 
+          routerLink="/scale/{{ scale.tonic.name }}/{{ scale.mode.name }}"
+        >
           <div class="scale-card-header">
             <span class="scale-tonic">{{ scale.tonic.name }}</span>
             <span class="scale-mode">{{ scale.mode.name }}</span>
