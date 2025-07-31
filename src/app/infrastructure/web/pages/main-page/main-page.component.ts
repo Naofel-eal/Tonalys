@@ -4,9 +4,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonItem,
-  IonList,
-  IonLabel,
   IonIcon,
 } from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
@@ -14,7 +11,7 @@ import { map, Observable, of } from 'rxjs';
 import { Scale } from 'src/app/domain/model/scale/scale';
 import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
 import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-scales/list-all-scales.usecase';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -26,13 +23,9 @@ import { Router, RouterLink } from '@angular/router';
     IonToolbar,
     IonTitle,
     IonContent,
-    IonItem,
-    IonList,
-    IonLabel,
     IonIcon,
     AsyncPipe,
     PianoOctaveComponent,
-    RouterLink,
   ],
 })
 export class MainPageComponent implements OnInit {
