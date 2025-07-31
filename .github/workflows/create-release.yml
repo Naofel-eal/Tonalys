@@ -50,4 +50,4 @@ jobs:
             🚀 Angular app ready to deploy!
           files: tonalys-${{ steps.get_version.outputs.version }}.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
