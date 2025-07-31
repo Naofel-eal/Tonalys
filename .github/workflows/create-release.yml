@@ -1,4 +1,4 @@
-name: Release Angular App
+name: Release Tonaly
 
 on:
   push:
