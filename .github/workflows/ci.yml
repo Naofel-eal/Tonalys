@@ -1,4 +1,4 @@
-name: CI
+name: Run Lint and Tests
 
 on:
     workflow_dispatch:

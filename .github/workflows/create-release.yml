@@ -36,11 +36,6 @@ jobs:
       - name: Build Angular app
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=www/browser --no-silent
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-
       - name: Zip build folder with version
         run: |
           cd /home/runner/work/Tonalys/Tonalys
