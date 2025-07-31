@@ -1,15 +1,18 @@
 <ion-header translucent="true" class="main-header">
   <ion-toolbar>
     <ion-title>
-      <ion-icon name="musical-notes" slot="start" style="margin-right:0.5em;"></ion-icon>
-      Tonalys
+      <div class="title">
+        <span class="brand-title">Tonalys</span>
+        <span class="brand-version">{{ version }}</span>
+      </div>
     </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="main-content" [fullscreen]="true">
   <div class="main-list-container">
-    <h1 class="main-title">Explorez les gammes</h1>
+    <h1 class="main-title">Explore the scales</h1>
     <div class="scales-grid">
       @for (scale of (scales$ | async); track $index) {
         <div class="scale-card" (click)="openScale(scale)">

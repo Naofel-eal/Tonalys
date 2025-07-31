@@ -12,6 +12,7 @@ import { Scale } from 'src/app/domain/model/scale/scale';
 import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
 import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-scales/list-all-scales.usecase';
 import { Router } from '@angular/router';
+import * as  packageJson from 'package.json';
 
 @Component({
   selector: 'app-main',
@@ -29,6 +30,7 @@ import { Router } from '@angular/router';
   ],
 })
 export class MainPageComponent implements OnInit {
+  public version = packageJson.version;
   public scales$: Observable<Scale[]> = of([]);
 
   public constructor(
