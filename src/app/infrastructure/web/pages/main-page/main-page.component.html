@@ -15,7 +15,7 @@
     <h1 class="main-title">Explore the scales</h1>
     <div class="scales-grid">
       @for (scale of (scales$ | async); track $index) {
-        <div 
+        <a 
           class="scale-card" 
           routerLink="/scale/{{ scale.tonic.name }}/{{ scale.mode.name }}"
         >
@@ -38,7 +38,7 @@
           <div class="scale-card-chevron">
             <ion-icon name="chevron-forward-outline"></ion-icon>
           </div>
-        </div>
+        </a>
       }
     </div>
   </div>
