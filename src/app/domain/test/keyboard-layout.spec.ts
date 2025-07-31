@@ -6,7 +6,7 @@ function getBlack(layout: KeyboardLayout, noteName: string, octave = 0): Key {
     )!;
 }
 function getWhite(layout: KeyboardLayout, noteName: string, octave = 0): Key {
-    return layout.Keys.find(
+    return layout.keys.find(
         k => k.note.name === noteName && k.octave === octave
     )!;
 }
@@ -21,15 +21,15 @@ describe('KeyboardLayout', () => {
     it('should generate correct number of keys for multiple octaves', () => {
         const layout = new KeyboardLayout(3);
         expect(layout.keys.length).toBe(36);
-        expect(layout.Keys.length).toBe(7 * 3);
+        expect(layout.whiteKeys.length).toBe(7 * 3);
         expect(layout.blackKeys.length).toBe(5 * 3);
     });
 
     it('should correctly separate white and black keys', () => {
         const layout = new KeyboardLayout(1);
-        expect(layout.Keys.every(k => k instanceof Key)).toBeTrue();
+        expect(layout.keys.every(k => k instanceof Key)).toBeTrue();
         expect(layout.blackKeys.every(k => k instanceof Key)).toBeTrue();
-        expect(layout.Keys.length).toBe(7);
+        expect(layout.whiteKeys.length).toBe(7);
         expect(layout.blackKeys.length).toBe(5);
     });
 
@@ -46,22 +46,22 @@ describe('KeyboardLayout', () => {
         beforeEach(() => { layout = new KeyboardLayout(1); });
 
         it('returns correct index for all black keys in C major octave', () => {
-            expect(layout.getLeftKeyIndex(getBlack(layout, 'C#'))).toBe(0);
-            expect(layout.getLeftKeyIndex(getBlack(layout, 'D#'))).toBe(1);
-            expect(layout.getLeftKeyIndex(getBlack(layout, 'F#'))).toBe(3);
-            expect(layout.getLeftKeyIndex(getBlack(layout, 'G#'))).toBe(4);
-            expect(layout.getLeftKeyIndex(getBlack(layout, 'A#'))).toBe(5);
+            expect(layout.getLeftWhiteKeyIndex(getBlack(layout, 'C#'))).toBe(0);
+            expect(layout.getLeftWhiteKeyIndex(getBlack(layout, 'D#'))).toBe(1);
+            expect(layout.getLeftWhiteKeyIndex(getBlack(layout, 'F#'))).toBe(3);
+            expect(layout.getLeftWhiteKeyIndex(getBlack(layout, 'G#'))).toBe(4);
+            expect(layout.getLeftWhiteKeyIndex(getBlack(layout, 'A#'))).toBe(5);
         });
 
         it('returns correct index for multi-octave layout', () => {
             const layout = new KeyboardLayout(2);
-            expect(layout.getLeftKeyIndex(getBlack(layout, 'C#', 0))).toBe(0);
-            expect(layout.getLeftKeyIndex(getBlack(layout, 'C#', 1))).toBe(0);
+            expect(layout.getLeftWhiteKeyIndex(getBlack(layout, 'C#', 0))).toBe(0);
+            expect(layout.getLeftWhiteKeyIndex(getBlack(layout, 'C#', 1))).toBe(0);
         });
 
         it('returns null for Key argument', () => {
             const white = getWhite(layout, 'C');
-            expect(layout.getLeftKeyIndex(white)).toBeNull();
+            expect(layout.getLeftWhiteKeyIndex(white)).toBeNull();
         });
     });
 

@@ -14,15 +14,15 @@ export class KeyboardLayout {
         }
     }
 
-    public get Keys(): Key[] {
+    public get whiteKeys(): Key[] {
         return this.keys.filter(k => !k.isBlackKey);
     }
     public get blackKeys(): Key[] {
         return this.keys.filter(k => k.isBlackKey);
     }
 
-    public getLeftKeyIndex(blackKey: Key): number | null {
-        const whites = this.Keys.filter(k => k.octave === blackKey.octave);
+    public getLeftWhiteKeyIndex(blackKey: Key): number | null {
+        const whites = this.whiteKeys.filter(k => k.octave === blackKey.octave);
         let candidate: Key | undefined;
         for (const white of whites) {
             if (white.note.index < blackKey.note.index) {

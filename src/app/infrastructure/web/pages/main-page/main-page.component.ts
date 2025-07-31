@@ -15,8 +15,6 @@ import { Scale } from 'src/app/domain/model/scale/scale';
 import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
 import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-scales/list-all-scales.usecase';
 import { Router, RouterLink } from '@angular/router';
-import { addIcons } from 'ionicons';
-import { chevronForwardOutline, musicalNoteOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-main',

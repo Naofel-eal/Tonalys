@@ -1,30 +1,39 @@
-<ion-header translucent="true">
+<ion-header translucent="true" class="main-header">
   <ion-toolbar>
-    <ion-title>Tonalys</ion-title>
+    <ion-title>
+      <ion-icon name="musical-notes" slot="start" style="margin-right:0.5em;"></ion-icon>
+      Tonalys
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true" class="ion-padding">
-  <ion-list lines="full">
-    @for (scale of (scales$ | async); track $index) {
-      <ion-item
-        button="true"
-        detail="false"
-        routerLink="/scale/{{ scale.tonic.name }}/{{ scale.mode.name }}"
-        routerDirection="forward"
-        class="scale-row"
-      >
-        <ion-icon slot="start" name="musical-note-outline"></ion-icon>
-
-        <ion-label>
-          <h2>{{ scale.tonic.name }} {{ scale.mode.name }}</h2>
-          <p>{{ getScalesNotesRepresentation(scale) }}</p>
-        </ion-label>
-
-        <app-piano-octave slot="end" [scale]="scale" class="octave-inline"></app-piano-octave>
-
-        <ion-icon slot="end" name="chevron-forward-outline" class="chevron"></ion-icon>
-      </ion-item>
-    }
-  </ion-list>
+<ion-content class="main-content" [fullscreen]="true">
+  <div class="main-list-container">
+    <h1 class="main-title">Explorez les gammes</h1>
+    <div class="scales-grid">
+      @for (scale of (scales$ | async); track $index) {
+        <div class="scale-card" (click)="openScale(scale)">
+          <div class="scale-card-header">
+            <span class="scale-tonic">{{ scale.tonic.name }}</span>
+            <span class="scale-mode">{{ scale.mode.name }}</span>
+          </div>
+          <div class="scale-card-notes">
+            @for (note of scale.notes; track note.name) {
+              <span class="scale-note-chip" [class.tonic-chip]="note.name === scale.tonic.name">{{ note.name }}</span>
+            }
+          </div>
+          <div class="scale-card-piano">
+            <app-piano-octave 
+              [notesToHighlight]="scale.notes"
+              [rootNote]="scale.tonic"
+              class="octave-inline"
+            ></app-piano-octave>
+          </div>
+          <div class="scale-card-chevron">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
 </ion-content>

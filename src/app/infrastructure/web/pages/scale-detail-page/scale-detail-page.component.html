@@ -1,24 +1,61 @@
-<ion-header translucent="true">
+@let scale = (scale$ | async)!;
+<ion-header translucent="true" class="detail-header">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ (scale$ | async)?.tonic?.name }} {{ (scale$ | async)?.mode?.name }}</ion-title>
+    <ion-title>
+      <span class="tonic">{{ scale.tonic.name }} {{ scale.mode.name }}</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  @let scale = scale$ | async;
+<ion-content class="scale-detail-content" [fullscreen]="true">
   @if (scale) {
-    <app-piano-octave [scale]="scale"></app-piano-octave>
 
-    <ion-list lines="none" class="ion-margin-top">
-      @for (note of scale.notes; track $index) {
-        <ion-item>
-          <ion-icon slot="start" name="musical-note-outline"></ion-icon>
-          <ion-label>{{ note.name }}</ion-label>
-        </ion-item>
+    <div class="main-scale-block">
+      <h1 class="scale-title">
+        <span class="tonic-big">{{ scale.tonic.name }}</span>
+        <span class="mode-big">{{ scale.mode.name }}</span>
+      </h1>
+      <div class="scale-notes">
+        @for (note of scale.notes; track $index) {
+          <span class="note-chip" [class.tonic-chip]="note.name === scale.tonic.name">
+            {{ note.name }}
+          </span>
+        }
+      </div>
+      <div class="piano-octave-wrapper">
+        <app-piano-octave
+          class="scale-octave"
+          [notesToHighlight]="scale.notes"
+          [rootNote]="scale.tonic">
+        </app-piano-octave>
+      </div>
+    </div>
+
+    <h2 class="chord-list-title">Scale chords</h2>
+    <div class="chords-list">
+      @for (chord of scale.chords; track $index) {
+        <div class="chord-card">
+          <div class="chord-head">
+            <span class="chord-root">{{ chord.root.name }}</span>
+            <span class="chord-type">{{ chord.quality.name }}</span>
+          </div>
+          <app-piano-octave
+            class="chord-octave"
+            [notesToHighlight]="chord.notes"
+            [rootNote]="chord.root">
+          </app-piano-octave>
+          <div class="chord-notes">
+            @for (note of chord.notes; track note.name) {
+              <span class="note-chip" [class.tonic-chip]="note.name === chord.root.name">
+                {{ note.name }}
+              </span>
+            }
+          </div>
+        </div>
       }
-    </ion-list>
+    </div>
   }
 </ion-content>

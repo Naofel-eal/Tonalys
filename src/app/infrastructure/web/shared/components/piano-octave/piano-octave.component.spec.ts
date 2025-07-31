@@ -21,23 +21,23 @@ describe('PianoOctaveComponent', () => {
   });
 
   it('should expose all white and black keys from layout', () => {
-    expect(component.Keys.length).toBe(7);
+    expect(component.whiteKeys.length).toBe(7);
     expect(component.blackKeys.length).toBe(5);
   });
 
   it('should clear highlights and set them correctly when scale is set', () => {
     const scale = new Scale(Note.C, Mode.MAJOR);
-    component.scale = scale;
-    expect(component.isActive(component.Keys[0])).toBeTrue();
-    expect(component.isActive(component.Keys[1])).toBeTrue();
-    expect(component.isActive(component.Keys[6])).toBeTrue();
+    component.notesToHighlight = scale.notes;
+    expect(component.isActive(component.whiteKeys[0])).toBeTrue();
+    expect(component.isActive(component.whiteKeys[1])).toBeTrue();
+    expect(component.isActive(component.whiteKeys[6])).toBeTrue();
     expect(component.isActive(component.blackKeys[0])).toBeFalse();
   });
 
   it('should return false for all keys if no scale is set', () => {
-    component.scale = undefined;
+    component.notesToHighlight = [];
     fixture.detectChanges();
-    expect(component.Keys.every(k => !component.isActive(k))).toBeTrue();
+    expect(component.whiteKeys.every(k => !component.isActive(k))).toBeTrue();
     expect(component.blackKeys.every(k => !component.isActive(k))).toBeTrue();
   });
 
@@ -50,7 +50,7 @@ describe('PianoOctaveComponent', () => {
   });
 
   it('should compute correct white key width percent', () => {
-    expect(component.KeyWidthPercent).toBeCloseTo(100 / 7, 5);
+    expect(component.whiteKeyWidthPercent).toBeCloseTo(100 / 7, 5);
   });
 
   it('should return correct black key offset px', () => {
@@ -59,9 +59,9 @@ describe('PianoOctaveComponent', () => {
 
   it('should support custom scales with altered notes', () => {
     const customScale = new Scale(Note.E, Mode.DORIAN);
-    component.scale = customScale;
-    expect(component.isActive(component.Keys.find(k => k.note.name === 'E')!)).toBeTrue();
+    component.notesToHighlight = customScale.notes;
+    expect(component.isActive(component.whiteKeys.find(k => k.note.name === 'E')!)).toBeTrue();
     expect(component.isActive(component.blackKeys.find(k => k.note.name === 'F#')!)).toBeTrue();
-    expect(component.isActive(component.Keys.find(k => k.note.name === 'C')!)).toBeFalse();
+    expect(component.isActive(component.whiteKeys.find(k => k.note.name === 'C')!)).toBeFalse();
   });
 });

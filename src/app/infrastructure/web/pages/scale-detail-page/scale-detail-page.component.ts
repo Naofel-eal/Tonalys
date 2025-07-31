@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton,
-  IonContent, IonIcon, IonLabel, IonItem, IonList
-} from '@ionic/angular/standalone';
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { map } from 'rxjs';
@@ -17,9 +15,9 @@ import { NoteName } from 'src/app/domain/model/note/note-name';
   selector: 'app-scale-detail-page',
   standalone: true,
   templateUrl: './scale-detail-page.component.html',
-  imports: [
-    IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
-    IonContent, IonList, IonItem, IonIcon, IonLabel, AsyncPipe, PianoOctaveComponent,
+  styleUrls: ['./scale-detail-page.component.css'],
+  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, 
+    IonTitle, IonContent, AsyncPipe, PianoOctaveComponent,
   ],
 })
 export class ScaleDetailPageComponent {
