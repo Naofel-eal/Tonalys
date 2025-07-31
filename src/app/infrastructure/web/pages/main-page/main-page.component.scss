@@ -111,10 +111,8 @@
   transition: background 0.13s;
 }
 .scale-note-chip.tonic-chip {
-  background: var(--ion-color-secondary);
   color: var(--ion-color-secondary-contrast);
   font-weight: bold;
-  border: 2px solid var(--ion-color-primary);
 }
 
 .scale-card-piano {
