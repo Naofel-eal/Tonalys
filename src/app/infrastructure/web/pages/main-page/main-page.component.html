@@ -13,11 +13,13 @@
 <ion-content class="main-content" [fullscreen]="true">
   <div class="main-list-container">
     <h1 class="main-title">Explore the scales</h1>
-    <div class="scales-grid">
+    <ion-list>
       @for (scale of (scales$ | async); track $index) {
-        <a 
-          class="scale-card" 
-          routerLink="/scale/{{ scale.tonic.name }}/{{ scale.mode.name }}"
+        <ion-item
+          class="scale-card"
+          [routerLink]="['/scale', scale.tonic.name, scale.mode.name]"
+          routerDirection="forward"
+          detail="true"
         >
           <div class="scale-card-header">
             <span class="scale-tonic">{{ scale.tonic.name }}</span>
@@ -35,11 +37,9 @@
               class="octave-inline"
             ></app-piano-octave>
           </div>
-          <div class="scale-card-chevron">
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-          </div>
-        </a>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
       }
-    </div>
+    </ion-list>
   </div>
 </ion-content>

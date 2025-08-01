@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href /Tonalys/",
+    "build:gh": "ionic build --configuration=production -- --base-href /tonalys/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",

@@ -1,9 +1,9 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "Tonalys",
+  "short_name": "Tonalys",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "/tonalys/",
+  "start_url": "/tonalys/",
   "icons": [
     {
       "src": "icons/icon-72x72.png",

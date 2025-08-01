@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "Tonalys",
       "installMode": "prefetch",
       "resources": {
         "files": [
@@ -26,5 +26,9 @@
         ]
       }
     }
+  ],
+  "navigationUrls": [
+    "/**",
+    "!/**/*.{js,css,svg,png,cur,jpg,jpeg,gif,webp,avif,ico,woff,woff2,otf,ttf}"
   ]
 }
