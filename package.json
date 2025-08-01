@@ -1,12 +1,12 @@
 {
   "name": "tonalys",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "author": "Naofel EL ALOUANI",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href /Tonalys/",
-    "build:gh": "ionic build --configuration=production -- --base-href /tonalys/",
+    "build:gh": "ng build --configuration=production --base-href /tonalys/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
