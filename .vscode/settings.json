@@ -3,5 +3,7 @@
         "angular-*": {
             "externalTemplate": true
         }
-    }
+    },
+    "javascript.preferences.autoImportFileExcludePatterns": ["**/node_modules/@types/node/**"],
+    "typescript.preferences.autoImportFileExcludePatterns": ["**/node_modules/@types/node/**"],
 }

@@ -1,7 +1,7 @@
 import { isDevMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideIonicAngular } from '@ionic/angular/standalone';
-import { provideRouter } from '@angular/router';
+import { provideIonicAngular, IonicRouteStrategy } from '@ionic/angular/standalone';
+import { provideRouter, RouteReuseStrategy, withHashLocation } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
@@ -11,7 +11,8 @@ import { ScaleRepositoryAdapter } from './app/infrastructure';
 bootstrapApplication(AppComponent, {
   providers: [
     provideIonicAngular(),
-    provideRouter(routes),
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideRouter(routes, withHashLocation()),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

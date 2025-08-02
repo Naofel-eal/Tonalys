@@ -9,9 +9,7 @@ import { chevronForwardOutline, musicalNoteOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonRouterOutlet, 
-    IonApp
-  ],
+  imports: [IonRouterOutlet, IonApp],
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {

@@ -6,22 +6,24 @@ import {
   IonContent,
   IonIcon,
   IonList,
-  IonItem,
-} from '@ionic/angular/standalone';
+  IonRouterLink, IonChip, IonLabel, IonCardHeader, IonCardContent, 
+  IonCardTitle} from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
 import { map, Observable, of } from 'rxjs';
 import { Scale } from 'src/app/domain/model/scale/scale';
 import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
 import { ListAllScalesUseCase } from '../../../../application/usecase/list-all-scales/list-all-scales.usecase';
-import { Router, RouterLink } from '@angular/router';
 import packageJson from '../../../../../../package.json';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   standalone: true,
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
-  imports: [
+  imports: [IonCardContent, IonCardHeader, 
+    IonLabel, 
+    IonChip, 
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -29,9 +31,11 @@ import packageJson from '../../../../../../package.json';
     IonIcon,
     AsyncPipe,
     PianoOctaveComponent,
-    RouterLink,
     IonList,
-    IonItem
+    IonRouterLink,
+    RouterLink,
+    IonCardContent,
+    IonCardTitle
   ],
 })
 export class MainPageComponent implements OnInit {
@@ -40,7 +44,6 @@ export class MainPageComponent implements OnInit {
 
   public constructor(
     private readonly listAllScalesUseCase: ListAllScalesUseCase,
-    private readonly router: Router
   ) {
   }
 

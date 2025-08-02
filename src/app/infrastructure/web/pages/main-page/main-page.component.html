@@ -1,45 +1,43 @@
-<ion-header translucent="true" class="main-header">
+<ion-header translucent>
   <ion-toolbar>
-    <ion-title>
-      <div class="title">
-        <span class="brand-title">Tonalys</span>
-        <span class="brand-version">{{ version }}</span>
-      </div>
-    </ion-title>
-
+    <ion-title>Tonalys {{ version }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="main-content" [fullscreen]="true">
-  <div class="main-list-container">
-    <h1 class="main-title">Explore the scales</h1>
-    <ion-list>
-      @for (scale of (scales$ | async); track $index) {
-        <ion-item
-          class="scale-card"
-          [routerLink]="['/scale', scale.tonic.name, scale.mode.name]"
-          routerDirection="forward"
-          detail="true"
-        >
-          <div class="scale-card-header">
-            <span class="scale-tonic">{{ scale.tonic.name }}</span>
-            <span class="scale-mode">{{ scale.mode.name }}</span>
-          </div>
-          <div class="scale-card-notes">
-            @for (note of scale.notes; track note.name) {
-              <span class="scale-note-chip" [class.tonic-chip]="note.name === scale.tonic.name">{{ note.name }}</span>
+<ion-content fullscreen class="ion-padding">
+  <h1 class="page-title">Explore the Scales</h1>
+  <ion-list lines="none">
+    @for (scale of scales$ | async; track $index) {
+      <ion-card
+        [routerLink]="['scale', scale.tonic.name, scale.mode.name]"
+        routerDirection="forward"
+        button
+        detail="false"
+        class="scale-card"
+      >
+        <ion-card-header>
+          <ion-card-title>
+            {{ scale.tonic.name }} {{ scale.mode.name }}
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="notes-container">
+            @for (note of scale.notes; track $index) {
+              <ion-chip [color]="note.name === scale.tonic.name ? 'primary' : 'medium'">
+                <ion-label>{{ note.name }}</ion-label>
+              </ion-chip>
             }
           </div>
-          <div class="scale-card-piano">
-            <app-piano-octave 
+          <div class="piano-container">
+            <app-piano-octave
               [notesToHighlight]="scale.notes"
               [rootNote]="scale.tonic"
               class="octave-inline"
             ></app-piano-octave>
           </div>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-      }
-    </ion-list>
-  </div>
+        </ion-card-content>
+      </ion-card>
+    }
+  </ion-list>
 </ion-content>
