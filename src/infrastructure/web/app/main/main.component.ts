@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ListAllScalesUseCase } from '../../../application';
-import { Scale } from '../../../domain';
 import { RouterLink } from '@angular/router';
 import { PianoOctaveComponent } from '../piano-octave/piano-octave.component';
 import { AsyncPipe} from '@angular/common';
+import { ListAllScalesUseCase } from '../../../../application';
+import { Scale } from '../../../../domain';
 
 @Component({
   selector: 'app-main',

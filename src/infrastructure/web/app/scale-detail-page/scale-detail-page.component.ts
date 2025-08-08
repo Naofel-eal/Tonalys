@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { map } from 'rxjs';
-import { NoteName, ModeName, Note, Mode, Scale } from '../../../domain';
 import { PianoOctaveComponent } from '../piano-octave/piano-octave.component';
+import { NoteName, ModeName, Note, Mode, Scale } from '../../../../domain';
 
 @Component({
   selector: 'app-scale-detail-page',

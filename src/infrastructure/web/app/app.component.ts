@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GenerateAllScalesUseCase } from './application';
+import { GenerateAllScalesUseCase } from '../../../application';
 
 @Component({
   selector: 'app-root',

@@ -3,8 +3,8 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
-import { SCALE_REPOSITORY } from './application';
-import { ScaleRepositoryAdapter } from './infrastructure/db/adapter/scale-repository.adapter';
+import { SCALE_REPOSITORY } from '../../../application';
+import { ScaleRepositoryAdapter } from '../../db/adapter/scale-repository.adapter';
 
 export const appConfig: ApplicationConfig = {
   providers: [
