@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Scale } from 'src/app/domain';
 import { ScaleStoreService } from '../../service/scale-store/scale-store.service';
+import { Scale } from '../../../domain';
 
 @Injectable({providedIn: 'root'})
 export class GenerateAllScalesUseCase {

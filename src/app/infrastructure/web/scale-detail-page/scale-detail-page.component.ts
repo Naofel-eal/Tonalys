@@ -1,24 +1,16 @@
 import { Component, inject } from '@angular/core';
-import {
-  IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent } from '@ionic/angular/standalone';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { map } from 'rxjs';
-import { PianoOctaveComponent } from '../../shared/components/piano-octave/piano-octave.component';
-import { Scale } from 'src/app/domain';
-import { Mode } from 'src/app/domain/model/mode/mode';
-import { ModeName } from 'src/app/domain/model/mode/mode-name';
-import { Note } from 'src/app/domain/model/note/note';
-import { NoteName } from 'src/app/domain/model/note/note-name';
+import { NoteName, ModeName, Note, Mode, Scale } from '../../../domain';
+import { PianoOctaveComponent } from '../piano-octave/piano-octave.component';
 
 @Component({
   selector: 'app-scale-detail-page',
   standalone: true,
   templateUrl: './scale-detail-page.component.html',
   styleUrls: ['./scale-detail-page.component.css'],
-  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, 
-    IonTitle, IonContent, AsyncPipe, PianoOctaveComponent,
-  ],
+  imports: [AsyncPipe, PianoOctaveComponent, RouterLink],
 })
 export class ScaleDetailPageComponent {
   private readonly route = inject(ActivatedRoute);

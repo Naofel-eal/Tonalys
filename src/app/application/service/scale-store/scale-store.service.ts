@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
-import { Scale, Note, Mode } from "src/app/domain";
 import { IScaleRepository, SCALE_REPOSITORY } from "../../repository/scale.repository";
+import { Scale, Note, Mode } from "../../../domain";
 
 @Injectable({ providedIn: 'root' })
 export class ScaleStoreService {

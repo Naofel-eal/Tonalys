@@ -1,23 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { SCALE_REPOSITORY } from './application/repository/scale.repository';
-import { of } from 'rxjs';
-import { provideRouter } from '@angular/router';
-
-const mockScaleRepository = {
-  saveAll: () => of([]),
-  getAll: () => of([]),
-  getById: () => of(null),
-};
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        provideRouter([]),
-        { provide: SCALE_REPOSITORY, useValue: mockScaleRepository },
-      ],
     }).compileComponents();
   });
 
@@ -25,5 +12,18 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it(`should have the 'app' title`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('app');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, app');
   });
 });

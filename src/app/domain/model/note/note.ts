@@ -43,4 +43,8 @@ export class Note {
   public equals(other: Note): boolean {
     return this.index === other.index;
   }
+
+  public static sort(notes: Note[]): Note[] {
+    return [...notes].sort((a, b) => a.index - b.index);
+  }
 }

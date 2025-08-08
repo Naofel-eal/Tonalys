@@ -16,10 +16,11 @@ export class Scale {
   }
 
   private computeNotes(): Note[] {
-    return this.mode.intervals.map((interval) => {
+    const notes = this.mode.intervals.map((interval) => {
       const idx = (this.tonic.index + interval) % Note.values.length;
       return Note.values[idx];
     });
+    return Note.sort(notes);
   }
 
   private computeChords(): Chord[] {
@@ -37,5 +38,9 @@ export class Scale {
     return chord.notes.every((note) =>
       this.notes.some((scaleNote) => scaleNote.equals(note)),
     );
+  }
+
+  public static sort(scales: Scale[]) {
+    return [...scales].sort((a, b) => a.tonic.index - b.tonic.index || a.mode.name.localeCompare(b.mode.name));
   }
 }

@@ -1,0 +1,41 @@
+<header class="header">
+    <h1 class="title">Tonalys</h1>
+</header>
+
+@let scales = scales$ | async;
+<main class="app-content">
+  <h2 class="page-title">Explore the Scales</h2>
+
+  @if (scales) {
+    <ul class="scale-list">
+      @for (scale of scales; track $index) {
+        <li class="scale-item">
+          <a [routerLink]="['/scale', scale.tonic.name, scale.mode.name]" class="card">
+            <div class="card-header">
+              <h3 class="card-title">{{ scale.tonic.name }} {{ scale.mode.name }}</h3>
+              <span class="chevron">›</span>
+            </div>
+
+            <div class="card-content">
+              <div class="notes-container">
+                @for (note of scale.notes; track $index) {
+                  <span
+                    class="chip"
+                    [class.primary]="note.name === scale.tonic.name"
+                    [class.medium]="note.name !== scale.tonic.name">
+                    {{ note.name }}
+                  </span>
+                }
+              </div>
+
+              <app-piano-octave
+                [notesToHighlight]="scale.notes"
+                [rootNote]="scale.tonic">
+              </app-piano-octave>
+            </div>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</main>

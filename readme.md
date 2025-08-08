@@ -1,107 +1,59 @@
-# 🎼 Tonalys – Piano Harmony Assistant
+# App
 
-**Tonalys** is a Progressive Web App designed to help musicians, composers, and learners explore musical harmony. Powered by music theory and intelligent matching algorithms, Tonalys makes it easy to understand the relationship between scales, chords, and notes.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
----
+## Development server
 
-## ✨ Features
-
-### 🎵 1. List All Musical Scales
-
-Browse all available **scales**, including different **modes** such as:
-
-- Major
-- Minor (Natural)
-- Dorian  
-_(More modes coming soon!)_
-
-Each scale is defined by its tonic and mode, and displays all the notes that compose it.
-
----
-
-### 🎹 2. Get Compatible Chords for a Scale
-
-For every scale, Tonalys automatically computes the **compatible chords** built on each degree of the scale.
-
-- Example:  
-  For `C Major`, you'll find chords like:  
-  `C Major`, `D Minor`, `E Minor`, `F Major`, `G Major`, `A Minor`, `B Diminished`
-
----
-
-### 🎼 3. Decompose Any Chord into Notes
-
-Tonalys lets you explore the internal structure of any chord.
-
-- Supported chord types:  
-  `Major`, `Minor`, `Diminished`, `Augmented`, `Dom7`, `Maj7`, `Min7`
-
-- Example:  
-  `G7` = `G`, `B`, `D`, `F`
-
----
-
-### 🎯 4. Find Matching Scales for Given Chords
-
-Give Tonalys one or more chords, and it will find all the scales that include **all the notes of those chords**.
-
-- Use case:  
-  You wrote a progression like `D Minor → G7 → C Major` and want to know which scale(s) fit.
-
-- Result:  
-  `C Major`, `A Minor`, `D Dorian`, etc. (depending on matches)
-
----
-
-## 🧱 Architecture (Backend)
-
-Tonalys is built around a clean and extensible music theory engine, with:
-
-- **Notes** – 12 chromatic steps, enharmonic aliases supported
-- **Chord Types** – structured by intervals (e.g. Major = `[0, 4, 7]`)
-- **Modes** – scale formulas by name (e.g. Minor = `[0, 2, 3, 5, 7, 8, 10]`)
-- **Chords** – computed from root + type
-- **Scales** – defined by tonic + mode, include compatibility logic
-
-All operations are pure, cached, and testable.
-
----
-
-## 🚀 Roadmap
-
-- Add support for chord inversions and extensions
-- Introduce more modes (Lydian, Mixolydian, etc.)
-- Add piano visualizer and playback
-- Add user favorites & history
-
----
-
-## 🛠 Tech Stack
-
-- **Frontend**: Angular + Ionic
-- **Backend Logic**: TypeScript (Clean Architecture)
-- **PWA**: Service Worker, Offline Support
-- **Tests**: Jest (TDD-ready domain models)
-
----
-
-## 📦 Installation (Dev)
+To start a local development server, run:
 
 ```bash
-git clone https://github.com/naofel-eal/tonalys.git
-cd tonalys
-npm install
-npm start
+ng serve
 ```
 
----
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## 🙌 Contribution
-Tonalys is a personal learning project, but feedback, improvements and forks are always welcome.
+## Code scaffolding
 
----
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-## 📜 License
-MIT – feel free to build on top of it.
+```bash
+ng generate component component-name
+```
 
----
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+
+```bash
+ng generate --help
+```
+
+## Building
+
+To build the project run:
+
+```bash
+ng build
+```
+
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running unit tests
+
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

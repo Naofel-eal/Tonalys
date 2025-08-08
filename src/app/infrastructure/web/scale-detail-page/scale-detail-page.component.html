@@ -1,0 +1,42 @@
+@let scale = (scale$ | async)!;
+
+<header class="header">
+  <a routerLink="/" class="back-btn" aria-label="Back">←</a>
+  <h1 class="title">{{ scale.tonic.name }} {{ scale.mode.name }}</h1>
+</header>
+
+<main class="scale-detail-content">
+  <div class="main-scale">
+    <app-piano-octave
+      class="scale-octave"
+      [notesToHighlight]="scale.notes"
+      [rootNote]="scale.tonic">
+    </app-piano-octave>
+  </div>
+
+  <h2 class="chord-list-title">Scale chords</h2>
+  <section class="chords-list">
+    @for (chord of scale.chords; track $index) {
+      <article class="chord-card">
+        <div class="chord-description">
+          <span class="chord-name">{{ chord.root.name }} {{ chord.quality.name }}:</span>
+          @for (note of chord.notes; track note.name) {
+            <span
+              class="note-chip"
+              [class.tonic-chip]="note.name === chord.root.name">
+              {{ note.name }}
+            </span>
+          }
+        </div>
+        
+        <app-piano-octave
+          class="chord-octave"
+          [notesToHighlight]="chord.notes"
+          [rootNote]="chord.root">
+        </app-piano-octave>
+        <hr />
+      </article>
+    }
+  </section>
+
+</main>

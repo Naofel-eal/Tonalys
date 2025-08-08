@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
-import { MainPageComponent } from './infrastructure/web/pages/main-page/main-page.component';
-import { ScaleDetailPageComponent } from './infrastructure/web/pages/scale-detail-page/scale-detail-page.component';
 
 export const routes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: 'scale/:tonic/:mode', component: ScaleDetailPageComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+    {
+        path: '',
+        loadComponent: () => import('./infrastructure/web/main/main.component').then(m => m.MainComponent)
+    },
+    {
+        path: 'scale/:tonic/:mode',
+        loadComponent: () => import('./infrastructure/web/scale-detail-page/scale-detail-page.component').then(m => m.ScaleDetailPageComponent)
+    }
 ];

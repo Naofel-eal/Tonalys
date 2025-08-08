@@ -1,16 +1,12 @@
 {
-  "name": "tonalys",
-  "version": "1.0.20",
-  "author": "Naofel EL ALOUANI",
+  "name": "app",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /Tonalys/",
-    "build:gh": "ng build --configuration=production --base-href /tonalys/",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint",
-    "prepare": "husky install"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -23,47 +19,22 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@angular/service-worker": "^19.0.0",
-    "@capacitor/app": "7.0.1",
-    "@capacitor/core": "7.3.0",
-    "@capacitor/haptics": "7.0.1",
-    "@capacitor/keyboard": "7.0.1",
-    "@capacitor/status-bar": "7.0.1",
-    "@ionic/angular": "^8.0.0",
     "dexie": "^4.0.11",
-    "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.15",
-    "@angular-eslint/builder": "^19.0.0",
-    "@angular-eslint/eslint-plugin": "^19.0.0",
-    "@angular-eslint/eslint-plugin-template": "^19.0.0",
-    "@angular-eslint/schematics": "^19.0.0",
-    "@angular-eslint/template-parser": "^19.0.0",
-    "@angular/cli": "^19.0.0",
+    "@angular-devkit/build-angular": "^19.0.2",
+    "@angular/cli": "^19.0.2",
     "@angular/compiler-cli": "^19.0.0",
-    "@angular/language-service": "^19.0.0",
-    "@capacitor/cli": "7.3.0",
-    "@ionic/angular-toolkit": "^12.0.0",
     "@types/jasmine": "~5.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.18.0",
-    "@typescript-eslint/parser": "^8.18.0",
-    "angular-cli-ghpages": "^2.0.3",
-    "eslint": "^9.16.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsdoc": "^48.2.1",
-    "eslint-plugin-prefer-arrow": "1.2.2",
-    "husky": "^9.0.0",
-    "jasmine-core": "~5.1.0",
-    "jasmine-spec-reporter": "~5.0.0",
+    "jasmine-core": "~5.4.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.6.3"
-  },
-  "description": "Tonalys project"
+    "typescript": "~5.6.2"
+  }
 }

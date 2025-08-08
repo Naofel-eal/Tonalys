@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KeyboardLayout } from 'src/app/domain/model/keyboard/keyboard-layout';
-import { Key } from 'src/app/domain/model/keyboard/key';
-import { Note } from 'src/app/domain';
-
+import { KeyboardLayout, Note, Key } from '../../../domain';
 @Component({
   selector: 'app-piano-octave',
   templateUrl: './piano-octave.component.html',

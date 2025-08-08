@@ -4,7 +4,7 @@ export * from './model/note/note';
 export * from './model/mode/mode-name';
 export * from './model/mode/mode';
 
-export * from './model/chord//chord-quality-name';
+export * from './model/chord/chord-quality-name';
 export * from './model/chord/chord-quality';
 export * from './model/chord/chord';
 

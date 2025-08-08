@@ -1,4 +1,4 @@
-import { Chord, ModeName, NoteName } from "src/app/domain";
+import { NoteName, ModeName, Chord } from "../../../domain";
 
 export interface ScaleEntity {
   id: string;

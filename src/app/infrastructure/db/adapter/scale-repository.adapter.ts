@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, map, switchMap } from 'rxjs';
-import { IScaleRepository } from 'src/app/application';
-import { Scale } from 'src/app/domain';
 import { ScaleEntity } from '../entity/scale-entity';
 import { ScaleMapper } from '../mapper/scale-mapper';
 import { db } from '../repository/database';
+import { IScaleRepository } from '../../../application';
+import { Scale } from '../../../domain';
 
 @Injectable({providedIn: 'root'})
 export class ScaleRepositoryAdapter implements IScaleRepository {
