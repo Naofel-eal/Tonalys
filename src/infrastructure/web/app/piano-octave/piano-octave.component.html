@@ -1,34 +1,49 @@
-<div class="piano-octave">
-  <div class="white-keys">
-    @for (whiteKey of whiteKeys; track whiteKey.index) {
-      <div
-        class="white-key"
-        [class.active]="isActive(whiteKey)"
-        [class.root]="isRoot(whiteKey)"
-        [attr.data-note]="whiteKey.note.name"
-        [style.width.%]="whiteKeyWidthPercent"
-      >
-        <span class="note-label">{{ whiteKey.note.name }}</span>
-      </div>
-    }
-  </div>
-  <div class="black-keys">
-    @for (blackKey of blackKeys; track blackKey.index) {
-      @if (getBlackKeyPosition(blackKey) !== null) {
+<div class="piano-container">
+  <div class="piano-octave">
+
+    <div class="white-keys-layer">
+      @for (whiteKey of whiteKeys; track whiteKey.index) {
         <div
-          class="black-key"
-          [style.left]="
-            'calc(' +
-              whiteKeyWidthPercent * (getBlackKeyPosition(blackKey)! + 1) +
-              '% - var(--black-key-offset))'
-          "
-          [class.active]="isActive(blackKey)"
-          [class.root]="isRoot(blackKey)"
-          [attr.data-note]="blackKey.note.name"
+          class="piano-key white-key"
+          [class.highlighted]="isActive(whiteKey)"
+          [attr.data-note]="whiteKey.note.name"
+          [style.width.%]="whiteKeyWidthPercent"
         >
-          <span class="note-label">{{ blackKey.note.name }}</span>
+          <div class="key-surface">
+            <div class="key-highlight"></div>
+            <span class="note-label">{{ whiteKey.note.name }}</span>
+          </div>
         </div>
       }
-    }
+    </div>
+
+    <div class="black-keys-layer">
+      @for (blackKey of blackKeys; track blackKey.index) {
+        @if (getBlackKeyPosition(blackKey) !== null) {
+          <div
+            class="piano-key black-key"
+            [style.left]="
+              'calc(' +
+                whiteKeyWidthPercent * (getBlackKeyPosition(blackKey)! + 1) +
+                '% - var(--black-key-offset))'
+            "
+            [class.highlighted]="isActive(blackKey)"
+            [attr.data-note]="blackKey.note.name"
+          >
+            <div class="key-surface">
+              <div class="key-highlight"></div>
+              <span class="note-label">{{ blackKey.note.name }}</span>
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <div class="piano-frame">
+      <div class="frame-edge top"></div>
+      <div class="frame-edge bottom"></div>
+      <div class="frame-edge left"></div>
+      <div class="frame-edge right"></div>
+    </div>
   </div>
 </div>

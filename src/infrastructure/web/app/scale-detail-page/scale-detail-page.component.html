@@ -1,42 +1,180 @@
 @let scale = (scale$ | async)!;
 
-<header class="header">
-  <a routerLink="/" class="back-btn" aria-label="Back">←</a>
-  <h1 class="title">{{ scale.tonic.name }} {{ scale.mode.name }}</h1>
+<header class="page-header" [ngClass]="{'reduced': headerReduced}">
+  <div class="header-container">
+    <nav class="navigation">
+      <a class="back-button" routerLink="/" aria-label="Back to scales list">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Scales</span>
+      </a>
+    </nav>
+    
+    <h1 class="scale-title">
+      <span class="tonic">{{ scale.tonic.name }}</span>
+      <span class="mode">{{ scale.mode.name }}</span>
+    </h1>
+    
+    <div class="scale-meta">
+      <div class="meta-item">
+        <span class="meta-label">Notes</span>
+        <span class="meta-value">{{ scale.notes.length }}</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Chords</span>
+        <span class="meta-value">{{ scale.chords.length }}</span>
+      </div>
+    </div>
+  </div>
 </header>
 
-<main class="scale-detail-content">
-  <div class="main-scale">
-    <app-piano-octave
-      class="scale-octave"
-      [notesToHighlight]="scale.notes"
-      [rootNote]="scale.tonic">
-    </app-piano-octave>
-  </div>
+<main class="main-content">
+  <div class="content-wrapper">
+    <section class="scale-overview">
+      <div class="section-header">
+        <h2 class="section-title">Scale Structure</h2>
+        <p class="section-description">Complete visualization of the scale on piano</p>
+      </div>
+      
+      <div class="scale-content">
+        <div class="notes-showcase">
+          <div class="notes-label">Scale Notes</div>
+          <div class="notes-display">
+            @for (note of scale.notes; track note.name) {
+              <div class="note-item" [class.root-note]="note.name === scale.tonic.name">
+                <span class="note-name">{{ note.name }}</span>
+              </div>
+            }
+          </div>
+        </div>
 
-  <h2 class="chord-list-title">Scale chords</h2>
-  <section class="chords-list">
-    @for (chord of scale.chords; track $index) {
-      <article class="chord-card">
-        <div class="chord-description">
-          <span class="chord-name">{{ chord.root.name }} {{ chord.quality.name }}:</span>
-          @for (note of chord.notes; track note.name) {
-            <span
-              class="note-chip"
-              [class.tonic-chip]="note.name === chord.root.name">
-              {{ note.name }}
-            </span>
+        <div class="piano-section">
+          <div class="piano-container">
+            <app-piano-octave
+              [notesToHighlight]="scale.notes"
+              [rootNote]="scale.tonic">
+            </app-piano-octave>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    @if (scale.chords.length) {
+      <section class="chords-section">
+        <div class="section-header">
+          <h2 class="section-title">Scale Harmonization</h2>
+          <p class="section-description">All chords that can be built from this scale</p>
+        </div>
+
+        <div class="chords-grid">
+          @for (chord of scale.chords; track $index) {
+            <article class="chord-card">
+              <div class="chord-header">
+                <div class="chord-info">
+                  <h3 class="chord-name">
+                    <span class="chord-root">{{ chord.root.name }}</span>
+                    <span class="chord-quality">{{ chord.quality.name }}</span>
+                  </h3>
+                </div>
+              </div>
+
+              <div class="chord-content">
+                <div class="chord-notes">
+                  <div class="notes-label">Chord Tones</div>
+                  <div class="chord-notes-grid">
+                    @for (note of chord.notes; track note.name) {
+                      <span class="chord-note" [class.chord-root]="note.name === chord.root.name">
+                        {{ note.name }}
+                      </span>
+                    }
+                  </div>
+                </div>
+
+                <div class="chord-piano">
+                  <app-piano-octave
+                    [notesToHighlight]="chord.notes"
+                    [rootNote]="chord.root">
+                  </app-piano-octave>
+                </div>
+              </div>
+
+              <div class="chord-function">
+                @switch ($index) {
+                  @case (0) { 
+                    <span class="function-label">Tonic</span>
+                    <span class="function-desc">Home chord, stable</span>
+                  }
+                  @case (3) { 
+                    <span class="function-label">Subdominant</span>
+                    <span class="function-desc">Departure from home</span>
+                  }
+                  @case (4) { 
+                    <span class="function-label">Dominant</span>
+                    <span class="function-desc">Tension, wants to resolve</span>
+                  }
+                  @default {
+                    <span class="function-label">Diatonic</span>
+                    <span class="function-desc">Scale harmony</span>
+                  }
+                }
+              </div>
+            </article>
           }
         </div>
-        
-        <app-piano-octave
-          class="chord-octave"
-          [notesToHighlight]="chord.notes"
-          [rootNote]="chord.root">
-        </app-piano-octave>
-        <hr />
-      </article>
+      </section>
+    } @else {
+      <section class="empty-chords">
+        <div class="empty-state">
+          <div class="empty-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M12 16H36M12 24H36M12 32H36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="empty-title">No chords available</h3>
+          <p class="empty-description">Chord information is not available for this scale</p>
+        </div>
+      </section>
     }
-  </section>
 
+    <section class="practice-section">
+      <div class="section-header">
+        <h2 class="section-title">Practice Tips</h2>
+        <p class="section-description">Suggestions for mastering this scale</p>
+      </div>
+      
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L15.09 8.26L22 9L17 14.74L18.18 22L12 18.77L5.82 22L7 14.74L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4 class="tip-title">Start Slowly</h4>
+          <p class="tip-description">Practice the scale ascending and descending at a comfortable tempo</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1L13.5 2.5L16.17 5.17L10.5 10.84L10.84 11.18C11.54 11.88 11.76 12.91 11.39 13.84L6.62 13.5L5.5 14.61L7.19 16.3L4.91 18.58C4.54 18.95 4.54 19.56 4.91 19.93C5.28 20.3 5.89 20.3 6.26 19.93L8.54 17.65L10.23 19.34L11.34 18.23L11 13.46C11.93 13.09 12.96 13.31 13.66 14.01L14 14.35L19.67 8.68L22.33 11.34L23.84 9.83L21 7V9Z" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4 class="tip-title">Use Proper Fingering</h4>
+          <p class="tip-description">Develop consistent fingering patterns for smooth execution</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" fill="currentColor"/>
+              <path d="M12 1V5M12 19V23M4.22 4.22L6.34 6.34M17.66 17.66L19.78 19.78M1 12H5M19 12H23M4.22 19.78L6.34 17.66M17.66 6.34L19.78 4.22" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h4 class="tip-title">Practice Patterns</h4>
+          <p class="tip-description">Try different rhythms and articulations to build familiarity</p>
+        </div>
+      </div>
+    </section>
+  </div>
 </main>

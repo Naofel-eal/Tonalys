@@ -28,10 +28,6 @@ export class PianoOctaveComponent {
     return this.highlighted.has(key.note.name);
   }
 
-  public isRoot(key: Key): boolean {
-    return this.rootNote ? key.note.name === this.rootNote.name : false;
-  }
-
   public getBlackKeyPosition(key: Key): number | null {
     return this.layout.getLeftWhiteKeyIndex(key);
   }
