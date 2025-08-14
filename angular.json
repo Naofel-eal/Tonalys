@@ -51,7 +51,9 @@
                 }
               ],
               "outputHashing": "all",
-              "serviceWorker": "ngsw-config.json"
+              "serviceWorker": "ngsw-config.json",
+              "baseHref": "/tonalys/",
+              "deployUrl": "/tonalys/"
             },
             "development": {
               "optimization": false,
