@@ -112,7 +112,6 @@
 .page-header.reduced .back-button svg { width: 16px; height: 16px; }
 .back-button:hover svg { transform: translateX(-2px); }
 
-
 .scale-title {
   display: flex;
   justify-content: center;

@@ -144,7 +144,6 @@
 .black-key .note-label { color: rgba(255, 255, 255, 0.8); font-size: calc(var(--note-label-size) * 0.9); }
 
 
-.root-indicator { display: none; }
 
 
 .piano-key,
@@ -215,21 +214,5 @@
 
 
 .piano-key { animation: none !important; }
-.white-key:nth-child(1),
-.white-key:nth-child(2),
-.white-key:nth-child(3),
-.white-key:nth-child(4),
-.white-key:nth-child(5),
-.white-key:nth-child(6),
-.white-key:nth-child(7),
-.black-key:nth-child(1),
-.black-key:nth-child(2),
-.black-key:nth-child(3),
-.black-key:nth-child(4),
-.black-key:nth-child(5) { animation: none !important; }
 
 
-.piano-key:focus-visible {
-  outline: 2px solid var(--piano-primary);
-  outline-offset: 2px;
-}
