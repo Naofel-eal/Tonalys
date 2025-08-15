@@ -1,24 +1,25 @@
-import { Component, HostListener, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
 import { map } from 'rxjs';
 import { PianoOctaveComponent } from '../piano-octave/piano-octave.component';
 import { NoteName, ModeName, Note, Mode, Scale } from '../../../../domain';
-
-const SCROLL_THRESHOLD_BEFORE_REDUCE_HEADER_IN_PX = 100;
+import { IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-scale-detail-page',
   standalone: true,
   templateUrl: './scale-detail-page.component.html',
   styleUrls: ['./scale-detail-page.component.css'],
-  imports: [AsyncPipe, PianoOctaveComponent, RouterLink, NgClass],
+  imports: [
+    AsyncPipe, PianoOctaveComponent,
+    IonContent, IonHeader, IonBackButton, 
+    IonTitle, IonToolbar, IonButtons, IonIcon
+  ],
 })
 export class ScaleDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-
-  public headerReduced = false;
 
   public readonly scale$ = this.route.paramMap.pipe(
     map(params => {
@@ -33,10 +34,4 @@ export class ScaleDetailPageComponent {
       }
     }),
   );
-
-  @HostListener('window:scroll', [])
-  public onWindowScroll() {
-    const scrollY = window.scrollY;
-    this.headerReduced  = scrollY > SCROLL_THRESHOLD_BEFORE_REDUCE_HEADER_IN_PX;
-  }
 }

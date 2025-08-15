@@ -6,8 +6,6 @@ import { PianoOctaveComponent } from '../piano-octave/piano-octave.component';
 import { ListAllScalesUseCase } from '../../../../application';
 import { Scale } from '../../../../domain';
 import { IonContent, IonRouterLink } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { chevronBackOutline, chevronForwardOutline, handLeft, listOutline, musicalNotesOutline, refresh, star } from 'ionicons/icons';
 
 @Component({
   selector: 'app-main',
@@ -21,9 +19,4 @@ export class MainComponent {
   private readonly listAllScalesUseCase: ListAllScalesUseCase = inject(ListAllScalesUseCase);
   
   public readonly scales$: Observable<Scale[]> = this.listAllScalesUseCase.execute();
-
-  constructor() {
-    addIcons({ chevronForwardOutline, musicalNotesOutline, chevronBackOutline, listOutline, star, handLeft, refresh });
-    
-  }
 }
