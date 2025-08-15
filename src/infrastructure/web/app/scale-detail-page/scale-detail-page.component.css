@@ -1,3 +1,7 @@
+ion-header {
+  background: #fff;
+}
+
 .tonic {
   background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-tint) 100%);
   -webkit-background-clip: text;
@@ -200,9 +204,6 @@ app-piano-octave {
   border-color: var(--ion-color-primary);
   font-weight: 600;
 }
-
-
-
 
 .empty-state {
   max-width: 400px;
